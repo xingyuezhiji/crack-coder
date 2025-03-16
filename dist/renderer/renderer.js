@@ -23,44 +23,61 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `body {
   margin: 0;
-  padding: 20px;
+  padding: 10px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background: transparent;
 }
 
 .app {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0.5rem;
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.card {
-  padding: 2em;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
-
-.shortcuts-info {
-  margin-bottom: 2em;
-  padding: 1em;
+.preview-row {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 8px;
+  min-height: 60px;
+  align-items: center;
 }
 
-.shortcuts-info p {
-  margin: 0.5em 0;
+.preview-item {
+  position: relative;
+  width: 90px;
+  height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
-.status {
-  margin: 2em 0;
+.preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  min-height: 24px;
 }
 
 .processing {
@@ -69,48 +86,50 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
 }
 
 .result {
-  margin: 1em 0;
-  padding: 1em;
+  color: #059669;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.result .hint {
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: normal;
+}
+
+.empty-status {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.9em;
+}
+
+.shortcuts-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  font-weight: 500;
+  font-size: 0.9em;
 }
 
-.actions {
+.shortcut {
   display: flex;
-  gap: 1em;
-  justify-content: center;
-  margin-top: 2em;
-}
-
-button {
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: rgba(26, 26, 26, 0.9);
-  color: white;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  transition: all 0.25s ease;
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-button:not(:disabled):hover {
-  background-color: rgba(44, 44, 44, 0.9);
-  transform: translateY(-1px);
+  align-items: center;
+  gap: 0.25rem;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 code {
-  background-color: rgba(241, 241, 241, 0.8);
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-family: monospace;
+  font-size: 0.9em;
 }
 
 /* Add a draggable region for window dragging since we removed the frame */
@@ -184,7 +203,7 @@ code {
   height: 100%;
   object-fit: cover;
   border-radius: 4px;
-} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,aAAa;EACb,gGAAgG;EAChG,uBAAuB;AACzB;;AAEA;EACE,gBAAgB;EAChB,cAAc;EACd,aAAa;EACb,kBAAkB;EAClB,0CAA0C;EAC1C,2BAA2B;EAC3B,mCAAmC;EACnC,kBAAkB;EAClB,wCAAwC;AAC1C;;AAEA;EACE,YAAY;EACZ,0CAA0C;EAC1C,kBAAkB;EAClB,0BAA0B;EAC1B,kCAAkC;AACpC;;AAEA;EACE,kBAAkB;EAClB,YAAY;EACZ,qCAAqC;EACrC,kBAAkB;AACpB;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,aAAa;AACf;;AAEA;EACE,cAAc;EACd,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,YAAY;EACZ,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,QAAQ;EACR,uBAAuB;EACvB,eAAe;AACjB;;AAEA;EACE,oBAAoB;EACpB,cAAc;EACd,gBAAgB;EAChB,oBAAoB;EACpB,uCAAuC;EACvC,YAAY;EACZ,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,0BAA0B;AAC5B;;AAEA;EACE,YAAY;EACZ,mBAAmB;AACrB;;AAEA;EACE,uCAAuC;EACvC,2BAA2B;AAC7B;;AAEA;EACE,0CAA0C;EAC1C,oBAAoB;EACpB,kBAAkB;EAClB,sBAAsB;AACxB;;AAEA,0EAA0E;AAC1E;EACE,WAAW;EACX,eAAe;EACf,MAAM;EACN,OAAO;EACP,QAAQ;EACR,YAAY;EACZ,wBAAwB;AAC1B;;AAEA;EACE,eAAe;EACf,QAAQ;EACR,UAAU;EACV,aAAa;EACb,QAAQ;EACR,aAAa;AACf;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,kBAAkB;EAClB,0CAA0C;EAC1C,yBAAyB;EACzB,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,0CAA0C;AAC5C;;AAEA;EACE,sCAAsC;EACtC,YAAY;AACd;;AAEA;EACE,aAAa;EACb,qCAAqC;EACrC,SAAS;EACT,cAAc;EACd,aAAa;EACb,qCAAqC;EACrC,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;AAC1C;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB","sourcesContent":["body {\n  margin: 0;\n  padding: 20px;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n  background: transparent;\n}\n\n.app {\n  max-width: 800px;\n  margin: 0 auto;\n  padding: 2rem;\n  text-align: center;\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n}\n\n.card {\n  padding: 2em;\n  background-color: rgba(255, 255, 255, 0.5);\n  border-radius: 8px;\n  backdrop-filter: blur(5px);\n  -webkit-backdrop-filter: blur(5px);\n}\n\n.shortcuts-info {\n  margin-bottom: 2em;\n  padding: 1em;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.shortcuts-info p {\n  margin: 0.5em 0;\n}\n\n.status {\n  margin: 2em 0;\n}\n\n.processing {\n  color: #2563eb;\n  font-weight: 500;\n}\n\n.result {\n  margin: 1em 0;\n  padding: 1em;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  font-weight: 500;\n}\n\n.actions {\n  display: flex;\n  gap: 1em;\n  justify-content: center;\n  margin-top: 2em;\n}\n\nbutton {\n  padding: 0.6em 1.2em;\n  font-size: 1em;\n  font-weight: 500;\n  font-family: inherit;\n  background-color: rgba(26, 26, 26, 0.9);\n  color: white;\n  cursor: pointer;\n  border: none;\n  border-radius: 8px;\n  transition: all 0.25s ease;\n}\n\nbutton:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n\nbutton:not(:disabled):hover {\n  background-color: rgba(44, 44, 44, 0.9);\n  transform: translateY(-1px);\n}\n\ncode {\n  background-color: rgba(241, 241, 241, 0.8);\n  padding: 0.2em 0.4em;\n  border-radius: 4px;\n  font-family: monospace;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n}\n\n.preview-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 1rem;\n  margin: 2rem 0;\n  padding: 1rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.preview-item {\n  position: relative;\n  aspect-ratio: 16/9;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n} "],"sourceRoot":""}]);
+} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,aAAa;EACb,gGAAgG;EAChG,uBAAuB;AACzB;;AAEA;EACE,eAAe;EACf,cAAc;EACd,eAAe;EACf,0CAA0C;EAC1C,2BAA2B;EAC3B,mCAAmC;EACnC,kBAAkB;EAClB,wCAAwC;EACxC,aAAa;EACb,sBAAsB;EACtB,WAAW;AACb;;AAEA;EACE,aAAa;EACb,WAAW;EACX,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA;EACE,kBAAkB;EAClB,WAAW;EACX,YAAY;EACZ,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;EACxC,cAAc;AAChB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,gBAAgB;EAChB,kBAAkB;EAClB,aAAa;EACb,sBAAsB;EACtB,QAAQ;EACR,mBAAmB;AACrB;;AAEA;EACE,gBAAgB;EAChB,yBAAyB;EACzB,mBAAmB;AACrB;;AAEA;EACE,yBAAyB;EACzB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,SAAS;EACT,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,yBAAyB;AAC3B;;AAEA;EACE,0CAA0C;EAC1C,oBAAoB;EACpB,kBAAkB;EAClB,sBAAsB;EACtB,gBAAgB;AAClB;;AAEA,0EAA0E;AAC1E;EACE,WAAW;EACX,eAAe;EACf,MAAM;EACN,OAAO;EACP,QAAQ;EACR,YAAY;EACZ,wBAAwB;AAC1B;;AAEA;EACE,eAAe;EACf,QAAQ;EACR,UAAU;EACV,aAAa;EACb,QAAQ;EACR,aAAa;AACf;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,kBAAkB;EAClB,0CAA0C;EAC1C,yBAAyB;EACzB,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,0CAA0C;AAC5C;;AAEA;EACE,sCAAsC;EACtC,YAAY;AACd;;AAEA;EACE,aAAa;EACb,qCAAqC;EACrC,SAAS;EACT,cAAc;EACd,aAAa;EACb,qCAAqC;EACrC,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;AAC1C;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB","sourcesContent":["body {\n  margin: 0;\n  padding: 10px;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n  background: transparent;\n}\n\n.app {\n  max-width: 100%;\n  margin: 0 auto;\n  padding: 0.5rem;\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n}\n\n.preview-row {\n  display: flex;\n  gap: 0.5rem;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  min-height: 60px;\n  align-items: center;\n}\n\n.preview-item {\n  position: relative;\n  width: 90px;\n  height: 60px;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  flex-shrink: 0;\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.status-row {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  min-height: 24px;\n}\n\n.processing {\n  color: #2563eb;\n  font-weight: 500;\n}\n\n.result {\n  color: #059669;\n  font-weight: 500;\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n  align-items: center;\n}\n\n.result .hint {\n  font-size: 0.8em;\n  color: rgba(0, 0, 0, 0.5);\n  font-weight: normal;\n}\n\n.empty-status {\n  color: rgba(0, 0, 0, 0.5);\n  font-size: 0.9em;\n}\n\n.shortcuts-row {\n  display: flex;\n  gap: 1rem;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  font-size: 0.9em;\n}\n\n.shortcut {\n  display: flex;\n  align-items: center;\n  gap: 0.25rem;\n  color: rgba(0, 0, 0, 0.7);\n}\n\ncode {\n  background-color: rgba(255, 255, 255, 0.5);\n  padding: 0.2em 0.4em;\n  border-radius: 4px;\n  font-family: monospace;\n  font-size: 0.9em;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n}\n\n.preview-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 1rem;\n  margin: 2rem 0;\n  padding: 1rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.preview-item {\n  position: relative;\n  aspect-ratio: 16/9;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n} "],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34079,67 +34098,125 @@ const App = () => {
   const [result, setResult] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [screenshots, setScreenshots] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    console.log('Setting up event listeners...');
+
+    // Keyboard event listener
+    const handleKeyDown = async event => {
+      console.log('Key pressed:', event.key);
+
+      // Check if Cmd/Ctrl is pressed
+      const isCmdOrCtrl = event.metaKey || event.ctrlKey;
+      switch (event.key.toLowerCase()) {
+        case 'h':
+          console.log('Screenshot hotkey pressed');
+          await handleTakeScreenshot();
+          break;
+        case 'enter':
+          console.log('Process hotkey pressed');
+          await handleProcess();
+          break;
+        case 'r':
+          console.log('Reset hotkey pressed');
+          await handleReset();
+          break;
+        case 'b':
+          if (isCmdOrCtrl) {
+            console.log('Toggle visibility hotkey pressed');
+            // Toggle visibility logic here
+          }
+          break;
+        case 'q':
+          if (isCmdOrCtrl) {
+            console.log('Quit hotkey pressed');
+            handleQuit();
+          }
+          break;
+      }
+    };
+
+    // Add keyboard event listener
+    window.addEventListener('keydown', handleKeyDown);
+
     // Listen for processing complete events
     window.electron.onProcessingComplete(result => {
+      console.log('Processing complete. Result:', result);
       setResult(result);
       setIsProcessing(false);
     });
 
     // Listen for new screenshots
     window.electron.onScreenshotTaken(screenshot => {
-      setScreenshots(prev => [...prev, screenshot]);
+      console.log('New screenshot taken:', screenshot);
+      setScreenshots(prev => {
+        const newScreenshots = [...prev, screenshot];
+        console.log('Updated screenshots array:', newScreenshots);
+        return newScreenshots;
+      });
     });
 
     // Listen for queue reset
     window.electron.onQueueReset(() => {
+      console.log('Queue reset triggered');
       setScreenshots([]);
+      setResult(null);
     });
+
+    // Cleanup
+    return () => {
+      console.log('Cleaning up event listeners...');
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
-  const handleMinimize = () => {
-    if (window.electron) window.electron.minimize();
-  };
-  const handleClose = () => {
-    if (window.electron) window.electron.close();
-  };
   const handleTakeScreenshot = async () => {
-    if (screenshots.length >= 4) return;
-    await window.electron.takeScreenshot();
+    console.log('Taking screenshot, current count:', screenshots.length);
+    if (screenshots.length >= 4) {
+      console.log('Maximum screenshots reached');
+      return;
+    }
+    try {
+      await window.electron.takeScreenshot();
+      console.log('Screenshot taken successfully');
+    } catch (error) {
+      console.error('Error taking screenshot:', error);
+    }
   };
   const handleProcess = async () => {
+    console.log('Starting processing. Current screenshots:', screenshots);
+    if (screenshots.length === 0) {
+      console.log('No screenshots to process');
+      return;
+    }
     setIsProcessing(true);
     setResult(null);
-    await window.electron.processScreenshots();
+    try {
+      await window.electron.processScreenshots();
+      console.log('Process request sent successfully');
+    } catch (error) {
+      console.error('Error processing screenshots:', error);
+      setIsProcessing(false);
+    }
   };
   const handleReset = async () => {
+    console.log('Resetting queue...');
     await window.electron.resetQueue();
   };
   const handleQuit = () => {
+    console.log('Quitting application...');
     window.electron.quit();
   };
+
+  // Log state changes
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    console.log('State update:', {
+      isProcessing,
+      result,
+      screenshotCount: screenshots.length
+    });
+  }, [isProcessing, result, screenshots]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "window-controls"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "control minimize",
-    onClick: handleMinimize,
-    title: "Minimize"
-  }, "\u2212"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "control close",
-    onClick: handleClose,
-    title: "Close"
-  }, "\xD7")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Screenshot Processor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "shortcuts-info"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Cmd/Ctrl + H"), " - Take Screenshot"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Cmd/Ctrl + Enter"), " - Process Queue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Cmd/Ctrl + R"), " - Reset Queue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Cmd/Ctrl + B"), " - Toggle Window"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Cmd/Ctrl + Q"), " - Quit App")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "status"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Screenshots in queue: ", screenshots.length, "/4"), isProcessing && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "processing"
-  }, "Processing..."), result && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "result"
-  }, result)), screenshots.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "preview-grid"
+    className: "preview-row"
   }, screenshots.map(screenshot => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     key: screenshot.id,
     className: "preview-item"
@@ -34147,19 +34224,28 @@ const App = () => {
     src: screenshot.preview,
     alt: "Screenshot preview"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "actions"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: handleTakeScreenshot,
-    disabled: isProcessing || screenshots.length >= 4
-  }, "Take Screenshot"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: handleProcess,
-    disabled: isProcessing || screenshots.length === 0
-  }, "Process Queue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: handleReset,
-    disabled: isProcessing && screenshots.length === 0
-  }, "Reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: handleQuit
-  }, "Quit"))));
+    className: "status-row"
+  }, isProcessing ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "processing"
+  }, "Processing... (", screenshots.length, " screenshots)") : result ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "result"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, result), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "hint"
+  }, "(Press R to reset)")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "empty-status"
+  }, screenshots.length > 0 ? `Press Enter to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}` : 'Press H to take a screenshot')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcuts-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "H"), " Screenshot"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u21B5"), " Process"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "R"), " Reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "B"), " Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Q"), " Quit")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 

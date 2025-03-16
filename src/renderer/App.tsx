@@ -30,107 +30,163 @@ const App: React.FC = () => {
   const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
 
   useEffect(() => {
+    console.log('Setting up event listeners...');
+
+    // Keyboard event listener
+    const handleKeyDown = async (event: KeyboardEvent) => {
+      console.log('Key pressed:', event.key);
+      
+      // Check if Cmd/Ctrl is pressed
+      const isCmdOrCtrl = event.metaKey || event.ctrlKey;
+
+      switch (event.key.toLowerCase()) {
+        case 'h':
+          console.log('Screenshot hotkey pressed');
+          await handleTakeScreenshot();
+          break;
+        case 'enter':
+          console.log('Process hotkey pressed');
+          await handleProcess();
+          break;
+        case 'r':
+          console.log('Reset hotkey pressed');
+          await handleReset();
+          break;
+        case 'b':
+          if (isCmdOrCtrl) {
+            console.log('Toggle visibility hotkey pressed');
+            // Toggle visibility logic here
+          }
+          break;
+        case 'q':
+          if (isCmdOrCtrl) {
+            console.log('Quit hotkey pressed');
+            handleQuit();
+          }
+          break;
+      }
+    };
+
+    // Add keyboard event listener
+    window.addEventListener('keydown', handleKeyDown);
+
     // Listen for processing complete events
     window.electron.onProcessingComplete((result) => {
+      console.log('Processing complete. Result:', result);
       setResult(result);
       setIsProcessing(false);
     });
 
     // Listen for new screenshots
     window.electron.onScreenshotTaken((screenshot) => {
-      setScreenshots(prev => [...prev, screenshot]);
+      console.log('New screenshot taken:', screenshot);
+      setScreenshots(prev => {
+        const newScreenshots = [...prev, screenshot];
+        console.log('Updated screenshots array:', newScreenshots);
+        return newScreenshots;
+      });
     });
 
     // Listen for queue reset
     window.electron.onQueueReset(() => {
+      console.log('Queue reset triggered');
       setScreenshots([]);
+      setResult(null);
     });
+
+    // Cleanup
+    return () => {
+      console.log('Cleaning up event listeners...');
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
-  const handleMinimize = () => {
-    if (window.electron) window.electron.minimize();
-  };
-
-  const handleClose = () => {
-    if (window.electron) window.electron.close();
-  };
-
   const handleTakeScreenshot = async () => {
-    if (screenshots.length >= 4) return;
-    await window.electron.takeScreenshot();
+    console.log('Taking screenshot, current count:', screenshots.length);
+    if (screenshots.length >= 4) {
+      console.log('Maximum screenshots reached');
+      return;
+    }
+    try {
+      await window.electron.takeScreenshot();
+      console.log('Screenshot taken successfully');
+    } catch (error) {
+      console.error('Error taking screenshot:', error);
+    }
   };
 
   const handleProcess = async () => {
+    console.log('Starting processing. Current screenshots:', screenshots);
+    if (screenshots.length === 0) {
+      console.log('No screenshots to process');
+      return;
+    }
     setIsProcessing(true);
     setResult(null);
-    await window.electron.processScreenshots();
+    try {
+      await window.electron.processScreenshots();
+      console.log('Process request sent successfully');
+    } catch (error) {
+      console.error('Error processing screenshots:', error);
+      setIsProcessing(false);
+    }
   };
 
   const handleReset = async () => {
+    console.log('Resetting queue...');
     await window.electron.resetQueue();
   };
 
   const handleQuit = () => {
+    console.log('Quitting application...');
     window.electron.quit();
   };
 
+  // Log state changes
+  useEffect(() => {
+    console.log('State update:', {
+      isProcessing,
+      result,
+      screenshotCount: screenshots.length
+    });
+  }, [isProcessing, result, screenshots]);
+
   return (
     <div className="app">
-      <div className="window-controls">
-        <button className="control minimize" onClick={handleMinimize} title="Minimize">−</button>
-        <button className="control close" onClick={handleClose} title="Close">×</button>
+      {/* Preview Row */}
+      <div className="preview-row">
+        {screenshots.map(screenshot => (
+          <div key={screenshot.id} className="preview-item">
+            <img src={screenshot.preview} alt="Screenshot preview" />
+          </div>
+        ))}
       </div>
-      
-      <h1>Screenshot Processor</h1>
-      
-      <div className="card">
-        <div className="shortcuts-info">
-          <p><code>Cmd/Ctrl + H</code> - Take Screenshot</p>
-          <p><code>Cmd/Ctrl + Enter</code> - Process Queue</p>
-          <p><code>Cmd/Ctrl + R</code> - Reset Queue</p>
-          <p><code>Cmd/Ctrl + B</code> - Toggle Window</p>
-          <p><code>Cmd/Ctrl + Q</code> - Quit App</p>
-        </div>
 
-        <div className="status">
-          <p>Screenshots in queue: {screenshots.length}/4</p>
-          {isProcessing && <p className="processing">Processing...</p>}
-          {result && <div className="result">{result}</div>}
-        </div>
-
-        {screenshots.length > 0 && (
-          <div className="preview-grid">
-            {screenshots.map(screenshot => (
-              <div key={screenshot.id} className="preview-item">
-                <img src={screenshot.preview} alt="Screenshot preview" />
-              </div>
-            ))}
+      {/* Status Row */}
+      <div className="status-row">
+        {isProcessing ? (
+          <div className="processing">Processing... ({screenshots.length} screenshots)</div>
+        ) : result ? (
+          <div className="result">
+            <div>{result}</div>
+            <div className="hint">(Press R to reset)</div>
+          </div>
+        ) : (
+          <div className="empty-status">
+            {screenshots.length > 0 
+              ? `Press Enter to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}`
+              : 'Press H to take a screenshot'}
           </div>
         )}
+      </div>
 
-        <div className="actions">
-          <button 
-            onClick={handleTakeScreenshot} 
-            disabled={isProcessing || screenshots.length >= 4}
-          >
-            Take Screenshot
-          </button>
-          <button 
-            onClick={handleProcess} 
-            disabled={isProcessing || screenshots.length === 0}
-          >
-            Process Queue
-          </button>
-          <button 
-            onClick={handleReset} 
-            disabled={isProcessing && screenshots.length === 0}
-          >
-            Reset
-          </button>
-          <button onClick={handleQuit}>
-            Quit
-          </button>
-        </div>
+      {/* Shortcuts Row */}
+      <div className="shortcuts-row">
+        <div className="shortcut"><code>H</code> Screenshot</div>
+        <div className="shortcut"><code>↵</code> Process</div>
+        <div className="shortcut"><code>R</code> Reset</div>
+        <div className="shortcut"><code>B</code> Toggle</div>
+        <div className="shortcut"><code>Q</code> Quit</div>
       </div>
     </div>
   );

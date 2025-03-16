@@ -40,79 +40,141 @@ const App = () => {
     const [result, setResult] = (0, react_1.useState)(null);
     const [screenshots, setScreenshots] = (0, react_1.useState)([]);
     (0, react_1.useEffect)(() => {
+        console.log('Setting up event listeners...');
+        // Keyboard event listener
+        const handleKeyDown = async (event) => {
+            console.log('Key pressed:', event.key);
+            // Check if Cmd/Ctrl is pressed
+            const isCmdOrCtrl = event.metaKey || event.ctrlKey;
+            switch (event.key.toLowerCase()) {
+                case 'h':
+                    console.log('Screenshot hotkey pressed');
+                    await handleTakeScreenshot();
+                    break;
+                case 'enter':
+                    console.log('Process hotkey pressed');
+                    await handleProcess();
+                    break;
+                case 'r':
+                    console.log('Reset hotkey pressed');
+                    await handleReset();
+                    break;
+                case 'b':
+                    if (isCmdOrCtrl) {
+                        console.log('Toggle visibility hotkey pressed');
+                        // Toggle visibility logic here
+                    }
+                    break;
+                case 'q':
+                    if (isCmdOrCtrl) {
+                        console.log('Quit hotkey pressed');
+                        handleQuit();
+                    }
+                    break;
+            }
+        };
+        // Add keyboard event listener
+        window.addEventListener('keydown', handleKeyDown);
         // Listen for processing complete events
         window.electron.onProcessingComplete((result) => {
+            console.log('Processing complete. Result:', result);
             setResult(result);
             setIsProcessing(false);
         });
         // Listen for new screenshots
         window.electron.onScreenshotTaken((screenshot) => {
-            setScreenshots(prev => [...prev, screenshot]);
+            console.log('New screenshot taken:', screenshot);
+            setScreenshots(prev => {
+                const newScreenshots = [...prev, screenshot];
+                console.log('Updated screenshots array:', newScreenshots);
+                return newScreenshots;
+            });
         });
         // Listen for queue reset
         window.electron.onQueueReset(() => {
+            console.log('Queue reset triggered');
             setScreenshots([]);
+            setResult(null);
         });
+        // Cleanup
+        return () => {
+            console.log('Cleaning up event listeners...');
+            window.removeEventListener('keydown', handleKeyDown);
+        };
     }, []);
-    const handleMinimize = () => {
-        if (window.electron)
-            window.electron.minimize();
-    };
-    const handleClose = () => {
-        if (window.electron)
-            window.electron.close();
-    };
     const handleTakeScreenshot = async () => {
-        if (screenshots.length >= 4)
+        console.log('Taking screenshot, current count:', screenshots.length);
+        if (screenshots.length >= 4) {
+            console.log('Maximum screenshots reached');
             return;
-        await window.electron.takeScreenshot();
+        }
+        try {
+            await window.electron.takeScreenshot();
+            console.log('Screenshot taken successfully');
+        }
+        catch (error) {
+            console.error('Error taking screenshot:', error);
+        }
     };
     const handleProcess = async () => {
+        console.log('Starting processing. Current screenshots:', screenshots);
+        if (screenshots.length === 0) {
+            console.log('No screenshots to process');
+            return;
+        }
         setIsProcessing(true);
         setResult(null);
-        await window.electron.processScreenshots();
+        try {
+            await window.electron.processScreenshots();
+            console.log('Process request sent successfully');
+        }
+        catch (error) {
+            console.error('Error processing screenshots:', error);
+            setIsProcessing(false);
+        }
     };
     const handleReset = async () => {
+        console.log('Resetting queue...');
         await window.electron.resetQueue();
     };
     const handleQuit = () => {
+        console.log('Quitting application...');
         window.electron.quit();
     };
+    // Log state changes
+    (0, react_1.useEffect)(() => {
+        console.log('State update:', {
+            isProcessing,
+            result,
+            screenshotCount: screenshots.length
+        });
+    }, [isProcessing, result, screenshots]);
     return (react_1.default.createElement("div", { className: "app" },
-        react_1.default.createElement("div", { className: "window-controls" },
-            react_1.default.createElement("button", { className: "control minimize", onClick: handleMinimize, title: "Minimize" }, "\u2212"),
-            react_1.default.createElement("button", { className: "control close", onClick: handleClose, title: "Close" }, "\u00D7")),
-        react_1.default.createElement("h1", null, "Screenshot Processor"),
-        react_1.default.createElement("div", { className: "card" },
-            react_1.default.createElement("div", { className: "shortcuts-info" },
-                react_1.default.createElement("p", null,
-                    react_1.default.createElement("code", null, "Cmd/Ctrl + H"),
-                    " - Take Screenshot"),
-                react_1.default.createElement("p", null,
-                    react_1.default.createElement("code", null, "Cmd/Ctrl + Enter"),
-                    " - Process Queue"),
-                react_1.default.createElement("p", null,
-                    react_1.default.createElement("code", null, "Cmd/Ctrl + R"),
-                    " - Reset Queue"),
-                react_1.default.createElement("p", null,
-                    react_1.default.createElement("code", null, "Cmd/Ctrl + B"),
-                    " - Toggle Window"),
-                react_1.default.createElement("p", null,
-                    react_1.default.createElement("code", null, "Cmd/Ctrl + Q"),
-                    " - Quit App")),
-            react_1.default.createElement("div", { className: "status" },
-                react_1.default.createElement("p", null,
-                    "Screenshots in queue: ",
-                    screenshots.length,
-                    "/4"),
-                isProcessing && react_1.default.createElement("p", { className: "processing" }, "Processing..."),
-                result && react_1.default.createElement("div", { className: "result" }, result)),
-            screenshots.length > 0 && (react_1.default.createElement("div", { className: "preview-grid" }, screenshots.map(screenshot => (react_1.default.createElement("div", { key: screenshot.id, className: "preview-item" },
-                react_1.default.createElement("img", { src: screenshot.preview, alt: "Screenshot preview" })))))),
-            react_1.default.createElement("div", { className: "actions" },
-                react_1.default.createElement("button", { onClick: handleTakeScreenshot, disabled: isProcessing || screenshots.length >= 4 }, "Take Screenshot"),
-                react_1.default.createElement("button", { onClick: handleProcess, disabled: isProcessing || screenshots.length === 0 }, "Process Queue"),
-                react_1.default.createElement("button", { onClick: handleReset, disabled: isProcessing && screenshots.length === 0 }, "Reset"),
-                react_1.default.createElement("button", { onClick: handleQuit }, "Quit")))));
+        react_1.default.createElement("div", { className: "preview-row" }, screenshots.map(screenshot => (react_1.default.createElement("div", { key: screenshot.id, className: "preview-item" },
+            react_1.default.createElement("img", { src: screenshot.preview, alt: "Screenshot preview" }))))),
+        react_1.default.createElement("div", { className: "status-row" }, isProcessing ? (react_1.default.createElement("div", { className: "processing" },
+            "Processing... (",
+            screenshots.length,
+            " screenshots)")) : result ? (react_1.default.createElement("div", { className: "result" },
+            react_1.default.createElement("div", null, result),
+            react_1.default.createElement("div", { className: "hint" }, "(Press R to reset)"))) : (react_1.default.createElement("div", { className: "empty-status" }, screenshots.length > 0
+            ? `Press Enter to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}`
+            : 'Press H to take a screenshot'))),
+        react_1.default.createElement("div", { className: "shortcuts-row" },
+            react_1.default.createElement("div", { className: "shortcut" },
+                react_1.default.createElement("code", null, "H"),
+                " Screenshot"),
+            react_1.default.createElement("div", { className: "shortcut" },
+                react_1.default.createElement("code", null, "\u21B5"),
+                " Process"),
+            react_1.default.createElement("div", { className: "shortcut" },
+                react_1.default.createElement("code", null, "R"),
+                " Reset"),
+            react_1.default.createElement("div", { className: "shortcut" },
+                react_1.default.createElement("code", null, "B"),
+                " Toggle"),
+            react_1.default.createElement("div", { className: "shortcut" },
+                react_1.default.createElement("code", null, "Q"),
+                " Quit"))));
 };
 exports.default = App;

@@ -43,6 +43,18 @@ function createWindow() {
     }
   });
 
+  // Open DevTools by default in development
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools({ mode: 'detach' });
+  }
+
+  // Register DevTools shortcut
+  globalShortcut.register('CommandOrControl+Shift+I', () => {
+    if (mainWindow) {
+      mainWindow.webContents.toggleDevTools();
+    }
+  });
+
   // Enable content protection to prevent screen capture
   mainWindow.setContentProtection(true);
 
@@ -143,7 +155,8 @@ async function handleProcessScreenshots() {
   setTimeout(() => {
     const result = "This is your solution! (Mock result)";
     mainWindow?.webContents.send('processing-complete', result);
-    handleResetQueue();
+    isProcessing = false;
+    // Remove automatic queue reset - let user explicitly reset with R key
   }, 2000);
 }
 
