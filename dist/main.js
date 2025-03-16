@@ -32,12 +32,16 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
 const path = __importStar(require("path"));
 const fs = __importStar(require("fs/promises"));
 const child_process_1 = require("child_process");
 const util_1 = require("util");
+const openai_1 = __importDefault(require("./services/openai"));
 const execFileAsync = (0, util_1.promisify)(child_process_1.execFile);
 let mainWindow = null;
 let screenshotQueue = [];
@@ -162,13 +166,22 @@ async function handleProcessScreenshots() {
         return;
     isProcessing = true;
     mainWindow?.webContents.send('processing-started');
-    // Mock processing with timeout
-    setTimeout(() => {
-        const result = "This is your solution! (Mock result)";
-        mainWindow?.webContents.send('processing-complete', result);
+    try {
+        const result = await openai_1.default.processScreenshots(screenshotQueue);
+        mainWindow?.webContents.send('processing-complete', JSON.stringify(result));
+    }
+    catch (error) {
+        console.error('Error processing screenshots:', error);
+        mainWindow?.webContents.send('processing-complete', JSON.stringify({
+            approach: 'Error processing screenshots',
+            code: 'Error occurred',
+            timeComplexity: 'N/A',
+            spaceComplexity: 'N/A'
+        }));
+    }
+    finally {
         isProcessing = false;
-        // Remove automatic queue reset - let user explicitly reset with R key
-    }, 2000);
+    }
 }
 async function handleResetQueue() {
     // Delete all screenshot files

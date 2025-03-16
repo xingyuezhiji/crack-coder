@@ -7,6 +7,13 @@ interface Screenshot {
   path: string;
 }
 
+interface ProcessedSolution {
+  approach: string;
+  code: string;
+  timeComplexity: string;
+  spaceComplexity: string;
+}
+
 declare global {
   interface Window {
     electron: {
@@ -19,6 +26,7 @@ declare global {
       resetQueue: () => Promise<void>;
       onProcessingComplete: (callback: (result: string) => void) => void;
       onScreenshotTaken: (callback: (data: Screenshot) => void) => void;
+      onProcessingStarted: (callback: () => void) => void;
       onQueueReset: (callback: () => void) => void;
     };
   }
@@ -26,11 +34,18 @@ declare global {
 
 const App: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [result, setResult] = useState<string | null>(null);
+  const [result, setResult] = useState<ProcessedSolution | null>(null);
   const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
 
   useEffect(() => {
     console.log('Setting up event listeners...');
+
+    // Listen for processing started events
+    window.electron.onProcessingStarted(() => {
+      console.log('Processing started');
+      setIsProcessing(true);
+      setResult(null);
+    });
 
     // Keyboard event listener
     const handleKeyDown = async (event: KeyboardEvent) => {
@@ -71,9 +86,14 @@ const App: React.FC = () => {
     window.addEventListener('keydown', handleKeyDown);
 
     // Listen for processing complete events
-    window.electron.onProcessingComplete((result) => {
-      console.log('Processing complete. Result:', result);
-      setResult(result);
+    window.electron.onProcessingComplete((resultStr) => {
+      console.log('Processing complete. Result:', resultStr);
+      try {
+        const parsedResult = JSON.parse(resultStr) as ProcessedSolution;
+        setResult(parsedResult);
+      } catch (error) {
+        console.error('Error parsing result:', error);
+      }
       setIsProcessing(false);
     });
 
@@ -168,7 +188,19 @@ const App: React.FC = () => {
           <div className="processing">Processing... ({screenshots.length} screenshots)</div>
         ) : result ? (
           <div className="result">
-            <div>{result}</div>
+            <div className="solution-section">
+              <h3>Approach</h3>
+              <p>{result.approach}</p>
+            </div>
+            <div className="solution-section">
+              <h3>Solution</h3>
+              <pre><code>{result.code}</code></pre>
+            </div>
+            <div className="solution-section">
+              <h3>Complexity Analysis</h3>
+              <p>Time: {result.timeComplexity}</p>
+              <p>Space: {result.spaceComplexity}</p>
+            </div>
             <div className="hint">(Press R to reset)</div>
           </div>
         ) : (

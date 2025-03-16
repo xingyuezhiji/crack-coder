@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs/promises';
 import { execFile } from 'child_process';
 import { promisify } from 'util';
+import openaiService from './services/openai';
 
 const execFileAsync = promisify(execFile);
 
@@ -150,14 +151,21 @@ async function handleProcessScreenshots() {
   
   isProcessing = true;
   mainWindow?.webContents.send('processing-started');
-  
-  // Mock processing with timeout
-  setTimeout(() => {
-    const result = "This is your solution! (Mock result)";
-    mainWindow?.webContents.send('processing-complete', result);
+
+  try {
+    const result = await openaiService.processScreenshots(screenshotQueue);
+    mainWindow?.webContents.send('processing-complete', JSON.stringify(result));
+  } catch (error) {
+    console.error('Error processing screenshots:', error);
+    mainWindow?.webContents.send('processing-complete', JSON.stringify({
+      approach: 'Error processing screenshots',
+      code: 'Error occurred',
+      timeComplexity: 'N/A',
+      spaceComplexity: 'N/A'
+    }));
+  } finally {
     isProcessing = false;
-    // Remove automatic queue reset - let user explicitly reset with R key
-  }, 2000);
+  }
 }
 
 async function handleResetQueue() {

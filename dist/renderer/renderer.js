@@ -203,7 +203,38 @@ code {
   height: 100%;
   object-fit: cover;
   border-radius: 4px;
-} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,aAAa;EACb,gGAAgG;EAChG,uBAAuB;AACzB;;AAEA;EACE,eAAe;EACf,cAAc;EACd,eAAe;EACf,0CAA0C;EAC1C,2BAA2B;EAC3B,mCAAmC;EACnC,kBAAkB;EAClB,wCAAwC;EACxC,aAAa;EACb,sBAAsB;EACtB,WAAW;AACb;;AAEA;EACE,aAAa;EACb,WAAW;EACX,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA;EACE,kBAAkB;EAClB,WAAW;EACX,YAAY;EACZ,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;EACxC,cAAc;AAChB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,gBAAgB;EAChB,kBAAkB;EAClB,aAAa;EACb,sBAAsB;EACtB,QAAQ;EACR,mBAAmB;AACrB;;AAEA;EACE,gBAAgB;EAChB,yBAAyB;EACzB,mBAAmB;AACrB;;AAEA;EACE,yBAAyB;EACzB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,SAAS;EACT,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,yBAAyB;AAC3B;;AAEA;EACE,0CAA0C;EAC1C,oBAAoB;EACpB,kBAAkB;EAClB,sBAAsB;EACtB,gBAAgB;AAClB;;AAEA,0EAA0E;AAC1E;EACE,WAAW;EACX,eAAe;EACf,MAAM;EACN,OAAO;EACP,QAAQ;EACR,YAAY;EACZ,wBAAwB;AAC1B;;AAEA;EACE,eAAe;EACf,QAAQ;EACR,UAAU;EACV,aAAa;EACb,QAAQ;EACR,aAAa;AACf;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,kBAAkB;EAClB,0CAA0C;EAC1C,yBAAyB;EACzB,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,0CAA0C;AAC5C;;AAEA;EACE,sCAAsC;EACtC,YAAY;AACd;;AAEA;EACE,aAAa;EACb,qCAAqC;EACrC,SAAS;EACT,cAAc;EACd,aAAa;EACb,qCAAqC;EACrC,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;AAC1C;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB","sourcesContent":["body {\n  margin: 0;\n  padding: 10px;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n  background: transparent;\n}\n\n.app {\n  max-width: 100%;\n  margin: 0 auto;\n  padding: 0.5rem;\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n}\n\n.preview-row {\n  display: flex;\n  gap: 0.5rem;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  min-height: 60px;\n  align-items: center;\n}\n\n.preview-item {\n  position: relative;\n  width: 90px;\n  height: 60px;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  flex-shrink: 0;\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.status-row {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  min-height: 24px;\n}\n\n.processing {\n  color: #2563eb;\n  font-weight: 500;\n}\n\n.result {\n  color: #059669;\n  font-weight: 500;\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n  align-items: center;\n}\n\n.result .hint {\n  font-size: 0.8em;\n  color: rgba(0, 0, 0, 0.5);\n  font-weight: normal;\n}\n\n.empty-status {\n  color: rgba(0, 0, 0, 0.5);\n  font-size: 0.9em;\n}\n\n.shortcuts-row {\n  display: flex;\n  gap: 1rem;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  font-size: 0.9em;\n}\n\n.shortcut {\n  display: flex;\n  align-items: center;\n  gap: 0.25rem;\n  color: rgba(0, 0, 0, 0.7);\n}\n\ncode {\n  background-color: rgba(255, 255, 255, 0.5);\n  padding: 0.2em 0.4em;\n  border-radius: 4px;\n  font-family: monospace;\n  font-size: 0.9em;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n}\n\n.preview-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 1rem;\n  margin: 2rem 0;\n  padding: 1rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.preview-item {\n  position: relative;\n  aspect-ratio: 16/9;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n} "],"sourceRoot":""}]);
+}
+
+.solution-section {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.solution-section h3 {
+  margin: 0 0 0.5rem 0;
+  color: #61dafb;
+  font-size: 1.1rem;
+}
+
+.solution-section pre {
+  margin: 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.solution-section code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+}
+
+.solution-section p {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,aAAa;EACb,gGAAgG;EAChG,uBAAuB;AACzB;;AAEA;EACE,eAAe;EACf,cAAc;EACd,eAAe;EACf,0CAA0C;EAC1C,2BAA2B;EAC3B,mCAAmC;EACnC,kBAAkB;EAClB,wCAAwC;EACxC,aAAa;EACb,sBAAsB;EACtB,WAAW;AACb;;AAEA;EACE,aAAa;EACb,WAAW;EACX,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA;EACE,kBAAkB;EAClB,WAAW;EACX,YAAY;EACZ,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;EACxC,cAAc;AAChB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,gBAAgB;EAChB,kBAAkB;EAClB,aAAa;EACb,sBAAsB;EACtB,QAAQ;EACR,mBAAmB;AACrB;;AAEA;EACE,gBAAgB;EAChB,yBAAyB;EACzB,mBAAmB;AACrB;;AAEA;EACE,yBAAyB;EACzB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,SAAS;EACT,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,yBAAyB;AAC3B;;AAEA;EACE,0CAA0C;EAC1C,oBAAoB;EACpB,kBAAkB;EAClB,sBAAsB;EACtB,gBAAgB;AAClB;;AAEA,0EAA0E;AAC1E;EACE,WAAW;EACX,eAAe;EACf,MAAM;EACN,OAAO;EACP,QAAQ;EACR,YAAY;EACZ,wBAAwB;AAC1B;;AAEA;EACE,eAAe;EACf,QAAQ;EACR,UAAU;EACV,aAAa;EACb,QAAQ;EACR,aAAa;AACf;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,kBAAkB;EAClB,0CAA0C;EAC1C,yBAAyB;EACzB,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,0CAA0C;AAC5C;;AAEA;EACE,sCAAsC;EACtC,YAAY;AACd;;AAEA;EACE,aAAa;EACb,qCAAqC;EACrC,SAAS;EACT,cAAc;EACd,aAAa;EACb,qCAAqC;EACrC,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;AAC1C;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,cAAc;EACd,aAAa;EACb,oCAAoC;EACpC,kBAAkB;AACpB;;AAEA;EACE,oBAAoB;EACpB,cAAc;EACd,iBAAiB;AACnB;;AAEA;EACE,SAAS;EACT,aAAa;EACb,8BAA8B;EAC9B,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,mCAAmC;EACnC,iBAAiB;AACnB;;AAEA;EACE,gBAAgB;EAChB,gBAAgB;AAClB","sourcesContent":["body {\n  margin: 0;\n  padding: 10px;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n  background: transparent;\n}\n\n.app {\n  max-width: 100%;\n  margin: 0 auto;\n  padding: 0.5rem;\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n}\n\n.preview-row {\n  display: flex;\n  gap: 0.5rem;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  min-height: 60px;\n  align-items: center;\n}\n\n.preview-item {\n  position: relative;\n  width: 90px;\n  height: 60px;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  flex-shrink: 0;\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.status-row {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  min-height: 24px;\n}\n\n.processing {\n  color: #2563eb;\n  font-weight: 500;\n}\n\n.result {\n  color: #059669;\n  font-weight: 500;\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n  align-items: center;\n}\n\n.result .hint {\n  font-size: 0.8em;\n  color: rgba(0, 0, 0, 0.5);\n  font-weight: normal;\n}\n\n.empty-status {\n  color: rgba(0, 0, 0, 0.5);\n  font-size: 0.9em;\n}\n\n.shortcuts-row {\n  display: flex;\n  gap: 1rem;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  font-size: 0.9em;\n}\n\n.shortcut {\n  display: flex;\n  align-items: center;\n  gap: 0.25rem;\n  color: rgba(0, 0, 0, 0.7);\n}\n\ncode {\n  background-color: rgba(255, 255, 255, 0.5);\n  padding: 0.2em 0.4em;\n  border-radius: 4px;\n  font-family: monospace;\n  font-size: 0.9em;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n}\n\n.preview-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 1rem;\n  margin: 2rem 0;\n  padding: 1rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.preview-item {\n  position: relative;\n  aspect-ratio: 16/9;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.solution-section {\n  margin: 1rem 0;\n  padding: 1rem;\n  background: rgba(255, 255, 255, 0.1);\n  border-radius: 8px;\n}\n\n.solution-section h3 {\n  margin: 0 0 0.5rem 0;\n  color: #61dafb;\n  font-size: 1.1rem;\n}\n\n.solution-section pre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\n.solution-section code {\n  font-family: 'Fira Code', monospace;\n  font-size: 0.9rem;\n}\n\n.solution-section p {\n  margin: 0.5rem 0;\n  line-height: 1.5;\n} "],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34100,6 +34131,13 @@ const App = () => {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     console.log('Setting up event listeners...');
 
+    // Listen for processing started events
+    window.electron.onProcessingStarted(() => {
+      console.log('Processing started');
+      setIsProcessing(true);
+      setResult(null);
+    });
+
     // Keyboard event listener
     const handleKeyDown = async event => {
       console.log('Key pressed:', event.key);
@@ -34138,9 +34176,14 @@ const App = () => {
     window.addEventListener('keydown', handleKeyDown);
 
     // Listen for processing complete events
-    window.electron.onProcessingComplete(result => {
-      console.log('Processing complete. Result:', result);
-      setResult(result);
+    window.electron.onProcessingComplete(resultStr => {
+      console.log('Processing complete. Result:', resultStr);
+      try {
+        const parsedResult = JSON.parse(resultStr);
+        setResult(parsedResult);
+      } catch (error) {
+        console.error('Error parsing result:', error);
+      }
       setIsProcessing(false);
     });
 
@@ -34229,7 +34272,13 @@ const App = () => {
     className: "processing"
   }, "Processing... (", screenshots.length, " screenshots)") : result ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "result"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, result), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "solution-section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Approach"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, result.approach)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "solution-section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Solution"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pre", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, result.code))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "solution-section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Complexity Analysis"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Time: ", result.timeComplexity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Space: ", result.spaceComplexity)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "hint"
   }, "(Press R to reset)")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "empty-status"

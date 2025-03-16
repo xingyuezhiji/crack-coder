@@ -41,6 +41,12 @@ const App = () => {
     const [screenshots, setScreenshots] = (0, react_1.useState)([]);
     (0, react_1.useEffect)(() => {
         console.log('Setting up event listeners...');
+        // Listen for processing started events
+        window.electron.onProcessingStarted(() => {
+            console.log('Processing started');
+            setIsProcessing(true);
+            setResult(null);
+        });
         // Keyboard event listener
         const handleKeyDown = async (event) => {
             console.log('Key pressed:', event.key);
@@ -76,9 +82,15 @@ const App = () => {
         // Add keyboard event listener
         window.addEventListener('keydown', handleKeyDown);
         // Listen for processing complete events
-        window.electron.onProcessingComplete((result) => {
-            console.log('Processing complete. Result:', result);
-            setResult(result);
+        window.electron.onProcessingComplete((resultStr) => {
+            console.log('Processing complete. Result:', resultStr);
+            try {
+                const parsedResult = JSON.parse(resultStr);
+                setResult(parsedResult);
+            }
+            catch (error) {
+                console.error('Error parsing result:', error);
+            }
             setIsProcessing(false);
         });
         // Listen for new screenshots
@@ -156,7 +168,21 @@ const App = () => {
             "Processing... (",
             screenshots.length,
             " screenshots)")) : result ? (react_1.default.createElement("div", { className: "result" },
-            react_1.default.createElement("div", null, result),
+            react_1.default.createElement("div", { className: "solution-section" },
+                react_1.default.createElement("h3", null, "Approach"),
+                react_1.default.createElement("p", null, result.approach)),
+            react_1.default.createElement("div", { className: "solution-section" },
+                react_1.default.createElement("h3", null, "Solution"),
+                react_1.default.createElement("pre", null,
+                    react_1.default.createElement("code", null, result.code))),
+            react_1.default.createElement("div", { className: "solution-section" },
+                react_1.default.createElement("h3", null, "Complexity Analysis"),
+                react_1.default.createElement("p", null,
+                    "Time: ",
+                    result.timeComplexity),
+                react_1.default.createElement("p", null,
+                    "Space: ",
+                    result.spaceComplexity)),
             react_1.default.createElement("div", { className: "hint" }, "(Press R to reset)"))) : (react_1.default.createElement("div", { className: "empty-status" }, screenshots.length > 0
             ? `Press Enter to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}`
             : 'Press H to take a screenshot'))),

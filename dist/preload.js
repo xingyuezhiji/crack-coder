@@ -16,6 +16,9 @@ electron_1.contextBridge.exposeInMainWorld('electron', {
     onScreenshotTaken: (callback) => {
         electron_1.ipcRenderer.on('screenshot-taken', (_event, data) => callback(data));
     },
+    onProcessingStarted: (callback) => {
+        electron_1.ipcRenderer.on('processing-started', callback);
+    },
     onQueueReset: (callback) => {
         electron_1.ipcRenderer.on('queue-reset', callback);
     }
