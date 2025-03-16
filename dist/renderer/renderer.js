@@ -24,30 +24,31 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.push([module.id, `body {
   margin: 0;
   padding: 10px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
   background: transparent;
+  color: #e0e0e0;
 }
 
 .app {
   max-width: 100%;
   margin: 0 auto;
-  padding: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  padding: 1rem;
+  background-color: rgba(70, 73, 78, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .preview-row {
   display: flex;
   gap: 0.5rem;
   padding: 0.5rem;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
+  background-color: rgba(30, 33, 40, 0.4);
+  border-radius: 4px;
   min-height: 60px;
   align-items: center;
 }
@@ -58,7 +59,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   height: 60px;
   border-radius: 4px;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
 }
@@ -72,38 +73,71 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
 
 .status-row {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: rgba(30, 33, 40, 0.4);
+  border-radius: 4px;
   min-height: 24px;
 }
 
 .processing {
-  color: #2563eb;
+  color: #abb2bf;
   font-weight: 500;
-}
-
-.result {
-  color: #059669;
-  font-weight: 500;
+  font-size: 0.7rem;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
   align-items: center;
 }
 
-.result .hint {
-  font-size: 0.8em;
-  color: rgba(0, 0, 0, 0.5);
+.result {
+  color: #98c379;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.solution-section {
+  background: rgba(30, 33, 40, 0.4);
+  border-radius: 4px;
+  padding: 1rem;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.solution-section h3 {
+  color: #e8ebef;
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem 0;
   font-weight: normal;
 }
 
+.solution-section pre {
+  margin: 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.solution-section code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 0.9rem;
+  color: #abb2bf;
+}
+
+.solution-section p {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+  color: #abb2bf;
+  font-size: 0.9rem;
+}
+
 .empty-status {
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 0.9em;
+  color: #abb2bf;
+  font-size: 0.6rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .shortcuts-row {
@@ -112,24 +146,39 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  font-size: 0.9em;
+  background-color: rgba(30, 33, 40, 0.4);
+  border-radius: 4px;
+  font-size: 0.6rem;
 }
 
 .shortcut {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  color: rgba(0, 0, 0, 0.7);
+  color: #abb2bf;
+  font-size: 0.6rem;
 }
 
-code {
-  background-color: rgba(255, 255, 255, 0.5);
+.shortcut code {
+  background-color: rgba(0, 0, 0, 0.2);
   padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-family: monospace;
-  font-size: 0.9em;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  color: #61afef;
+  font-size: 0.6rem;
+}
+
+/* Syntax highlighting colors for code */
+.keyword { color: #c678dd; }
+.comment { color: #5c6370; }
+.string { color: #98c379; }
+.number { color: #d19a66; }
+.function { color: #61afef; }
+
+.hint {
+  font-size: 0.8rem;
+  color: #5c6370;
+  margin-top: 0.5rem;
 }
 
 /* Add a draggable region for window dragging since we removed the frame */
@@ -214,8 +263,8 @@ code {
 
 .solution-section h3 {
   margin: 0 0 0.5rem 0;
-  color: #61dafb;
-  font-size: 1.1rem;
+  color: #e8ebef;
+  font-size: 1.0rem;
 }
 
 .solution-section pre {
@@ -234,7 +283,36 @@ code {
 .solution-section p {
   margin: 0.5rem 0;
   line-height: 1.5;
-} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,aAAa;EACb,gGAAgG;EAChG,uBAAuB;AACzB;;AAEA;EACE,eAAe;EACf,cAAc;EACd,eAAe;EACf,0CAA0C;EAC1C,2BAA2B;EAC3B,mCAAmC;EACnC,kBAAkB;EAClB,wCAAwC;EACxC,aAAa;EACb,sBAAsB;EACtB,WAAW;AACb;;AAEA;EACE,aAAa;EACb,WAAW;EACX,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA;EACE,kBAAkB;EAClB,WAAW;EACX,YAAY;EACZ,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;EACxC,cAAc;AAChB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,gBAAgB;EAChB,kBAAkB;EAClB,aAAa;EACb,sBAAsB;EACtB,QAAQ;EACR,mBAAmB;AACrB;;AAEA;EACE,gBAAgB;EAChB,yBAAyB;EACzB,mBAAmB;AACrB;;AAEA;EACE,yBAAyB;EACzB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,SAAS;EACT,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,yBAAyB;AAC3B;;AAEA;EACE,0CAA0C;EAC1C,oBAAoB;EACpB,kBAAkB;EAClB,sBAAsB;EACtB,gBAAgB;AAClB;;AAEA,0EAA0E;AAC1E;EACE,WAAW;EACX,eAAe;EACf,MAAM;EACN,OAAO;EACP,QAAQ;EACR,YAAY;EACZ,wBAAwB;AAC1B;;AAEA;EACE,eAAe;EACf,QAAQ;EACR,UAAU;EACV,aAAa;EACb,QAAQ;EACR,aAAa;AACf;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,kBAAkB;EAClB,0CAA0C;EAC1C,yBAAyB;EACzB,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,0CAA0C;AAC5C;;AAEA;EACE,sCAAsC;EACtC,YAAY;AACd;;AAEA;EACE,aAAa;EACb,qCAAqC;EACrC,SAAS;EACT,cAAc;EACd,aAAa;EACb,qCAAqC;EACrC,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;AAC1C;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,cAAc;EACd,aAAa;EACb,oCAAoC;EACpC,kBAAkB;AACpB;;AAEA;EACE,oBAAoB;EACpB,cAAc;EACd,iBAAiB;AACnB;;AAEA;EACE,SAAS;EACT,aAAa;EACb,8BAA8B;EAC9B,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,mCAAmC;EACnC,iBAAiB;AACnB;;AAEA;EACE,gBAAgB;EAChB,gBAAgB;AAClB","sourcesContent":["body {\n  margin: 0;\n  padding: 10px;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n  background: transparent;\n}\n\n.app {\n  max-width: 100%;\n  margin: 0 auto;\n  padding: 0.5rem;\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n}\n\n.preview-row {\n  display: flex;\n  gap: 0.5rem;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  min-height: 60px;\n  align-items: center;\n}\n\n.preview-item {\n  position: relative;\n  width: 90px;\n  height: 60px;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  flex-shrink: 0;\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.status-row {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  min-height: 24px;\n}\n\n.processing {\n  color: #2563eb;\n  font-weight: 500;\n}\n\n.result {\n  color: #059669;\n  font-weight: 500;\n  text-align: center;\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n  align-items: center;\n}\n\n.result .hint {\n  font-size: 0.8em;\n  color: rgba(0, 0, 0, 0.5);\n  font-weight: normal;\n}\n\n.empty-status {\n  color: rgba(0, 0, 0, 0.5);\n  font-size: 0.9em;\n}\n\n.shortcuts-row {\n  display: flex;\n  gap: 1rem;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  font-size: 0.9em;\n}\n\n.shortcut {\n  display: flex;\n  align-items: center;\n  gap: 0.25rem;\n  color: rgba(0, 0, 0, 0.7);\n}\n\ncode {\n  background-color: rgba(255, 255, 255, 0.5);\n  padding: 0.2em 0.4em;\n  border-radius: 4px;\n  font-family: monospace;\n  font-size: 0.9em;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n}\n\n.preview-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 1rem;\n  margin: 2rem 0;\n  padding: 1rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.preview-item {\n  position: relative;\n  aspect-ratio: 16/9;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.solution-section {\n  margin: 1rem 0;\n  padding: 1rem;\n  background: rgba(255, 255, 255, 0.1);\n  border-radius: 8px;\n}\n\n.solution-section h3 {\n  margin: 0 0 0.5rem 0;\n  color: #61dafb;\n  font-size: 1.1rem;\n}\n\n.solution-section pre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\n.solution-section code {\n  font-family: 'Fira Code', monospace;\n  font-size: 0.9rem;\n}\n\n.solution-section p {\n  margin: 0.5rem 0;\n  line-height: 1.5;\n} "],"sourceRoot":""}]);
+}
+
+.code-line {
+  display: flex;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  line-height: 1.5;
+  white-space: pre;
+}
+
+.line-number {
+  color: #7c8089;
+  text-align: right;
+  padding-right: 1em;
+  user-select: none;
+  min-width: 2em;
+}
+
+pre {
+  margin: 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 0.9rem;
+  color: #abb2bf;
+} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"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","sourcesContent":["body {\n  margin: 0;\n  padding: 10px;\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  background: transparent;\n  color: #e0e0e0;\n}\n\n.app {\n  max-width: 100%;\n  margin: 0 auto;\n  padding: 1rem;\n  background-color: rgba(70, 73, 78, 0.65);\n  backdrop-filter: blur(8px);\n  -webkit-backdrop-filter: blur(8px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n}\n\n.preview-row {\n  display: flex;\n  gap: 0.5rem;\n  padding: 0.5rem;\n  background-color: rgba(30, 33, 40, 0.4);\n  border-radius: 4px;\n  min-height: 60px;\n  align-items: center;\n}\n\n.preview-item {\n  position: relative;\n  width: 90px;\n  height: 60px;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.2);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  flex-shrink: 0;\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.status-row {\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n  background-color: rgba(30, 33, 40, 0.4);\n  border-radius: 4px;\n  min-height: 24px;\n}\n\n.processing {\n  color: #abb2bf;\n  font-weight: 500;\n  font-size: 0.7rem;\n  text-align: center;\n  align-items: center;\n}\n\n.result {\n  color: #98c379;\n  text-align: left;\n  display: flex;\n  flex-direction: column;\n  gap: 0.4rem;\n}\n\n.solution-section {\n  background: rgba(30, 33, 40, 0.4);\n  border-radius: 4px;\n  padding: 1rem;\n  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;\n}\n\n.solution-section h3 {\n  color: #e8ebef;\n  font-size: 0.8rem;\n  margin: 0 0 0.5rem 0;\n  font-weight: normal;\n}\n\n.solution-section pre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.2);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\n.solution-section code {\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  font-size: 0.9rem;\n  color: #abb2bf;\n}\n\n.solution-section p {\n  margin: 0.5rem 0;\n  line-height: 1.5;\n  color: #abb2bf;\n  font-size: 0.9rem;\n}\n\n.empty-status {\n  color: #abb2bf;\n  font-size: 0.6rem;\n  align-items: center;\n  justify-content: center;\n  display: flex;\n  flex-direction: column;\n}\n\n.shortcuts-row {\n  display: flex;\n  gap: 1rem;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(30, 33, 40, 0.4);\n  border-radius: 4px;\n  font-size: 0.6rem;\n}\n\n.shortcut {\n  display: flex;\n  align-items: center;\n  gap: 0.25rem;\n  color: #abb2bf;\n  font-size: 0.6rem;\n}\n\n.shortcut code {\n  background-color: rgba(0, 0, 0, 0.2);\n  padding: 0.2em 0.4em;\n  border-radius: 3px;\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  color: #61afef;\n  font-size: 0.6rem;\n}\n\n/* Syntax highlighting colors for code */\n.keyword { color: #c678dd; }\n.comment { color: #5c6370; }\n.string { color: #98c379; }\n.number { color: #d19a66; }\n.function { color: #61afef; }\n\n.hint {\n  font-size: 0.8rem;\n  color: #5c6370;\n  margin-top: 0.5rem;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n}\n\n.preview-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 1rem;\n  margin: 2rem 0;\n  padding: 1rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.preview-item {\n  position: relative;\n  aspect-ratio: 16/9;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.solution-section {\n  margin: 1rem 0;\n  padding: 1rem;\n  background: rgba(255, 255, 255, 0.1);\n  border-radius: 8px;\n}\n\n.solution-section h3 {\n  margin: 0 0 0.5rem 0;\n  color: #e8ebef;\n  font-size: 1.0rem;\n}\n\n.solution-section pre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\n.solution-section code {\n  font-family: 'Fira Code', monospace;\n  font-size: 0.9rem;\n}\n\n.solution-section p {\n  margin: 0.5rem 0;\n  line-height: 1.5;\n}\n\n.code-line {\n  display: flex;\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  line-height: 1.5;\n  white-space: pre;\n}\n\n.line-number {\n  color: #7c8089;\n  text-align: right;\n  padding-right: 1em;\n  user-select: none;\n  min-width: 2em;\n}\n\npre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\ncode {\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  font-size: 0.9rem;\n  color: #abb2bf;\n} "],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34256,9 +34334,29 @@ const App = () => {
       screenshotCount: screenshots.length
     });
   }, [isProcessing, result, screenshots]);
+  const formatCode = code => {
+    return code.split('\n').map((line, index) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      key: index,
+      className: "code-line"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: "line-number"
+    }, index + 1), line));
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcuts-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + H"), " Screenshot"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + \u21B5"), " Solution"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + R"), " Reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + B"), " Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + Q"), " Quit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "preview-row"
   }, screenshots.map(screenshot => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     key: screenshot.id,
@@ -34274,27 +34372,15 @@ const App = () => {
     className: "result"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "solution-section"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Approach"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, result.approach)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "My Thoughts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, result.approach)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "solution-section"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Solution"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pre", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, result.code))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Solution"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pre", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, formatCode(result.code)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "solution-section"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Complexity Analysis"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Time: ", result.timeComplexity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Space: ", result.spaceComplexity)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Complexity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Time: ", result.timeComplexity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Space: ", result.spaceComplexity)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "hint"
-  }, "(Press R to reset)")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, "(Press \u2318/Ctrl + R to reset)")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "empty-status"
-  }, screenshots.length > 0 ? `Press Enter to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}` : 'Press H to take a screenshot')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "shortcuts-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "shortcut"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "H"), " Screenshot"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "shortcut"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u21B5"), " Process"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "shortcut"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "R"), " Reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "shortcut"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "B"), " Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "shortcut"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Q"), " Quit")));
+  }, screenshots.length > 0 ? `Press ⌘/Ctrl + ↵ to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}` : 'Press ⌘/Ctrl + H to take a screenshot')));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 

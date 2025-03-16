@@ -161,7 +161,28 @@ const App = () => {
             screenshotCount: screenshots.length
         });
     }, [isProcessing, result, screenshots]);
+    const formatCode = (code) => {
+        return code.split('\n').map((line, index) => (react_1.default.createElement("div", { key: index, className: "code-line" },
+            react_1.default.createElement("span", { className: "line-number" }, index + 1),
+            line)));
+    };
     return (react_1.default.createElement("div", { className: "app" },
+        react_1.default.createElement("div", { className: "shortcuts-row" },
+            react_1.default.createElement("div", { className: "shortcut" },
+                react_1.default.createElement("code", null, "\u2318/Ctrl + H"),
+                " Screenshot"),
+            react_1.default.createElement("div", { className: "shortcut" },
+                react_1.default.createElement("code", null, "\u2318/Ctrl + \u21B5"),
+                " Solution"),
+            react_1.default.createElement("div", { className: "shortcut" },
+                react_1.default.createElement("code", null, "\u2318/Ctrl + R"),
+                " Reset"),
+            react_1.default.createElement("div", { className: "shortcut" },
+                react_1.default.createElement("code", null, "\u2318/Ctrl + B"),
+                " Toggle"),
+            react_1.default.createElement("div", { className: "shortcut" },
+                react_1.default.createElement("code", null, "\u2318/Ctrl + Q"),
+                " Quit")),
         react_1.default.createElement("div", { className: "preview-row" }, screenshots.map(screenshot => (react_1.default.createElement("div", { key: screenshot.id, className: "preview-item" },
             react_1.default.createElement("img", { src: screenshot.preview, alt: "Screenshot preview" }))))),
         react_1.default.createElement("div", { className: "status-row" }, isProcessing ? (react_1.default.createElement("div", { className: "processing" },
@@ -169,38 +190,22 @@ const App = () => {
             screenshots.length,
             " screenshots)")) : result ? (react_1.default.createElement("div", { className: "result" },
             react_1.default.createElement("div", { className: "solution-section" },
-                react_1.default.createElement("h3", null, "Approach"),
+                react_1.default.createElement("h3", null, "My Thoughts"),
                 react_1.default.createElement("p", null, result.approach)),
             react_1.default.createElement("div", { className: "solution-section" },
                 react_1.default.createElement("h3", null, "Solution"),
                 react_1.default.createElement("pre", null,
-                    react_1.default.createElement("code", null, result.code))),
+                    react_1.default.createElement("code", null, formatCode(result.code)))),
             react_1.default.createElement("div", { className: "solution-section" },
-                react_1.default.createElement("h3", null, "Complexity Analysis"),
+                react_1.default.createElement("h3", null, "Complexity"),
                 react_1.default.createElement("p", null,
                     "Time: ",
                     result.timeComplexity),
                 react_1.default.createElement("p", null,
                     "Space: ",
                     result.spaceComplexity)),
-            react_1.default.createElement("div", { className: "hint" }, "(Press R to reset)"))) : (react_1.default.createElement("div", { className: "empty-status" }, screenshots.length > 0
-            ? `Press Enter to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}`
-            : 'Press H to take a screenshot'))),
-        react_1.default.createElement("div", { className: "shortcuts-row" },
-            react_1.default.createElement("div", { className: "shortcut" },
-                react_1.default.createElement("code", null, "H"),
-                " Screenshot"),
-            react_1.default.createElement("div", { className: "shortcut" },
-                react_1.default.createElement("code", null, "\u21B5"),
-                " Process"),
-            react_1.default.createElement("div", { className: "shortcut" },
-                react_1.default.createElement("code", null, "R"),
-                " Reset"),
-            react_1.default.createElement("div", { className: "shortcut" },
-                react_1.default.createElement("code", null, "B"),
-                " Toggle"),
-            react_1.default.createElement("div", { className: "shortcut" },
-                react_1.default.createElement("code", null, "Q"),
-                " Quit"))));
+            react_1.default.createElement("div", { className: "hint" }, "(Press \u2318/Ctrl + R to reset)"))) : (react_1.default.createElement("div", { className: "empty-status" }, screenshots.length > 0
+            ? `Press ⌘/Ctrl + ↵ to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}`
+            : 'Press ⌘/Ctrl + H to take a screenshot')))));
 };
 exports.default = App;

@@ -171,9 +171,25 @@ const App: React.FC = () => {
     });
   }, [isProcessing, result, screenshots]);
 
+  const formatCode = (code: string) => {
+    return code.split('\n').map((line, index) => (
+      <div key={index} className="code-line">
+        <span className="line-number">{index + 1}</span>
+        {line}
+      </div>
+    ));
+  };
+
   return (
     <div className="app">
       {/* Preview Row */}
+      <div className="shortcuts-row">
+        <div className="shortcut"><code>⌘/Ctrl + H</code> Screenshot</div>
+        <div className="shortcut"><code>⌘/Ctrl + ↵</code> Solution</div>
+        <div className="shortcut"><code>⌘/Ctrl + R</code> Reset</div>
+        <div className="shortcut"><code>⌘/Ctrl + B</code> Toggle</div>
+        <div className="shortcut"><code>⌘/Ctrl + Q</code> Quit</div>
+      </div>
       <div className="preview-row">
         {screenshots.map(screenshot => (
           <div key={screenshot.id} className="preview-item">
@@ -189,37 +205,33 @@ const App: React.FC = () => {
         ) : result ? (
           <div className="result">
             <div className="solution-section">
-              <h3>Approach</h3>
+              <h3>My Thoughts</h3>
               <p>{result.approach}</p>
             </div>
             <div className="solution-section">
               <h3>Solution</h3>
-              <pre><code>{result.code}</code></pre>
+              <pre>
+                <code>{formatCode(result.code)}</code>
+              </pre>
             </div>
             <div className="solution-section">
-              <h3>Complexity Analysis</h3>
+              <h3>Complexity</h3>
               <p>Time: {result.timeComplexity}</p>
               <p>Space: {result.spaceComplexity}</p>
             </div>
-            <div className="hint">(Press R to reset)</div>
+            <div className="hint">(Press ⌘/Ctrl + R to reset)</div>
           </div>
         ) : (
           <div className="empty-status">
             {screenshots.length > 0 
-              ? `Press Enter to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}`
-              : 'Press H to take a screenshot'}
+              ? `Press ⌘/Ctrl + ↵ to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}`
+              : 'Press ⌘/Ctrl + H to take a screenshot'}
           </div>
         )}
       </div>
 
       {/* Shortcuts Row */}
-      <div className="shortcuts-row">
-        <div className="shortcut"><code>H</code> Screenshot</div>
-        <div className="shortcut"><code>↵</code> Process</div>
-        <div className="shortcut"><code>R</code> Reset</div>
-        <div className="shortcut"><code>B</code> Toggle</div>
-        <div className="shortcut"><code>Q</code> Quit</div>
-      </div>
+ 
     </div>
   );
 };
