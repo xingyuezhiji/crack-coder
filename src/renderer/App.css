@@ -25,6 +25,41 @@ body {
   -webkit-backdrop-filter: blur(5px);
 }
 
+.shortcuts-info {
+  margin-bottom: 2em;
+  padding: 1em;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.shortcuts-info p {
+  margin: 0.5em 0;
+}
+
+.status {
+  margin: 2em 0;
+}
+
+.processing {
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.result {
+  margin: 1em 0;
+  padding: 1em;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  margin-top: 2em;
+}
+
 button {
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -38,7 +73,12 @@ button {
   transition: all 0.25s ease;
 }
 
-button:hover {
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
   background-color: rgba(44, 44, 44, 0.9);
   transform: translateY(-1px);
 }
@@ -95,4 +135,30 @@ code {
 .control.close:hover {
   background-color: rgba(255, 0, 0, 0.8);
   color: white;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.preview-item {
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
 } 

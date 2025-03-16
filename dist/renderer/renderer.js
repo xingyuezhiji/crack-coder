@@ -48,6 +48,41 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   -webkit-backdrop-filter: blur(5px);
 }
 
+.shortcuts-info {
+  margin-bottom: 2em;
+  padding: 1em;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.shortcuts-info p {
+  margin: 0.5em 0;
+}
+
+.status {
+  margin: 2em 0;
+}
+
+.processing {
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.result {
+  margin: 1em 0;
+  padding: 1em;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  margin-top: 2em;
+}
+
 button {
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -61,7 +96,12 @@ button {
   transition: all 0.25s ease;
 }
 
-button:hover {
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
   background-color: rgba(44, 44, 44, 0.9);
   transform: translateY(-1px);
 }
@@ -118,7 +158,33 @@ code {
 .control.close:hover {
   background-color: rgba(255, 0, 0, 0.8);
   color: white;
-} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,aAAa;EACb,gGAAgG;EAChG,uBAAuB;AACzB;;AAEA;EACE,gBAAgB;EAChB,cAAc;EACd,aAAa;EACb,kBAAkB;EAClB,0CAA0C;EAC1C,2BAA2B;EAC3B,mCAAmC;EACnC,kBAAkB;EAClB,wCAAwC;AAC1C;;AAEA;EACE,YAAY;EACZ,0CAA0C;EAC1C,kBAAkB;EAClB,0BAA0B;EAC1B,kCAAkC;AACpC;;AAEA;EACE,oBAAoB;EACpB,cAAc;EACd,gBAAgB;EAChB,oBAAoB;EACpB,uCAAuC;EACvC,YAAY;EACZ,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,0BAA0B;AAC5B;;AAEA;EACE,uCAAuC;EACvC,2BAA2B;AAC7B;;AAEA;EACE,0CAA0C;EAC1C,oBAAoB;EACpB,kBAAkB;EAClB,sBAAsB;AACxB;;AAEA,0EAA0E;AAC1E;EACE,WAAW;EACX,eAAe;EACf,MAAM;EACN,OAAO;EACP,QAAQ;EACR,YAAY;EACZ,wBAAwB;AAC1B;;AAEA;EACE,eAAe;EACf,QAAQ;EACR,UAAU;EACV,aAAa;EACb,QAAQ;EACR,aAAa;AACf;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,kBAAkB;EAClB,0CAA0C;EAC1C,yBAAyB;EACzB,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,0CAA0C;AAC5C;;AAEA;EACE,sCAAsC;EACtC,YAAY;AACd","sourcesContent":["body {\n  margin: 0;\n  padding: 20px;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n  background: transparent;\n}\n\n.app {\n  max-width: 800px;\n  margin: 0 auto;\n  padding: 2rem;\n  text-align: center;\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n}\n\n.card {\n  padding: 2em;\n  background-color: rgba(255, 255, 255, 0.5);\n  border-radius: 8px;\n  backdrop-filter: blur(5px);\n  -webkit-backdrop-filter: blur(5px);\n}\n\nbutton {\n  padding: 0.6em 1.2em;\n  font-size: 1em;\n  font-weight: 500;\n  font-family: inherit;\n  background-color: rgba(26, 26, 26, 0.9);\n  color: white;\n  cursor: pointer;\n  border: none;\n  border-radius: 8px;\n  transition: all 0.25s ease;\n}\n\nbutton:hover {\n  background-color: rgba(44, 44, 44, 0.9);\n  transform: translateY(-1px);\n}\n\ncode {\n  background-color: rgba(241, 241, 241, 0.8);\n  padding: 0.2em 0.4em;\n  border-radius: 4px;\n  font-family: monospace;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n} "],"sourceRoot":""}]);
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.preview-item {
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,aAAa;EACb,gGAAgG;EAChG,uBAAuB;AACzB;;AAEA;EACE,gBAAgB;EAChB,cAAc;EACd,aAAa;EACb,kBAAkB;EAClB,0CAA0C;EAC1C,2BAA2B;EAC3B,mCAAmC;EACnC,kBAAkB;EAClB,wCAAwC;AAC1C;;AAEA;EACE,YAAY;EACZ,0CAA0C;EAC1C,kBAAkB;EAClB,0BAA0B;EAC1B,kCAAkC;AACpC;;AAEA;EACE,kBAAkB;EAClB,YAAY;EACZ,qCAAqC;EACrC,kBAAkB;AACpB;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,aAAa;AACf;;AAEA;EACE,cAAc;EACd,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,YAAY;EACZ,qCAAqC;EACrC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,QAAQ;EACR,uBAAuB;EACvB,eAAe;AACjB;;AAEA;EACE,oBAAoB;EACpB,cAAc;EACd,gBAAgB;EAChB,oBAAoB;EACpB,uCAAuC;EACvC,YAAY;EACZ,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,0BAA0B;AAC5B;;AAEA;EACE,YAAY;EACZ,mBAAmB;AACrB;;AAEA;EACE,uCAAuC;EACvC,2BAA2B;AAC7B;;AAEA;EACE,0CAA0C;EAC1C,oBAAoB;EACpB,kBAAkB;EAClB,sBAAsB;AACxB;;AAEA,0EAA0E;AAC1E;EACE,WAAW;EACX,eAAe;EACf,MAAM;EACN,OAAO;EACP,QAAQ;EACR,YAAY;EACZ,wBAAwB;AAC1B;;AAEA;EACE,eAAe;EACf,QAAQ;EACR,UAAU;EACV,aAAa;EACb,QAAQ;EACR,aAAa;AACf;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,kBAAkB;EAClB,0CAA0C;EAC1C,yBAAyB;EACzB,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,0CAA0C;AAC5C;;AAEA;EACE,sCAAsC;EACtC,YAAY;AACd;;AAEA;EACE,aAAa;EACb,qCAAqC;EACrC,SAAS;EACT,cAAc;EACd,aAAa;EACb,qCAAqC;EACrC,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;AAC1C;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB","sourcesContent":["body {\n  margin: 0;\n  padding: 20px;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n  background: transparent;\n}\n\n.app {\n  max-width: 800px;\n  margin: 0 auto;\n  padding: 2rem;\n  text-align: center;\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n}\n\n.card {\n  padding: 2em;\n  background-color: rgba(255, 255, 255, 0.5);\n  border-radius: 8px;\n  backdrop-filter: blur(5px);\n  -webkit-backdrop-filter: blur(5px);\n}\n\n.shortcuts-info {\n  margin-bottom: 2em;\n  padding: 1em;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.shortcuts-info p {\n  margin: 0.5em 0;\n}\n\n.status {\n  margin: 2em 0;\n}\n\n.processing {\n  color: #2563eb;\n  font-weight: 500;\n}\n\n.result {\n  margin: 1em 0;\n  padding: 1em;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n  font-weight: 500;\n}\n\n.actions {\n  display: flex;\n  gap: 1em;\n  justify-content: center;\n  margin-top: 2em;\n}\n\nbutton {\n  padding: 0.6em 1.2em;\n  font-size: 1em;\n  font-weight: 500;\n  font-family: inherit;\n  background-color: rgba(26, 26, 26, 0.9);\n  color: white;\n  cursor: pointer;\n  border: none;\n  border-radius: 8px;\n  transition: all 0.25s ease;\n}\n\nbutton:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n\nbutton:not(:disabled):hover {\n  background-color: rgba(44, 44, 44, 0.9);\n  transform: translateY(-1px);\n}\n\ncode {\n  background-color: rgba(241, 241, 241, 0.8);\n  padding: 0.2em 0.4em;\n  border-radius: 4px;\n  font-family: monospace;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n}\n\n.preview-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 1rem;\n  margin: 2rem 0;\n  padding: 1rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.preview-item {\n  position: relative;\n  aspect-ratio: 16/9;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n} "],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34009,12 +34075,46 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const App = () => {
-  const [count, setCount] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  const [isProcessing, setIsProcessing] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [result, setResult] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [screenshots, setScreenshots] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    // Listen for processing complete events
+    window.electron.onProcessingComplete(result => {
+      setResult(result);
+      setIsProcessing(false);
+    });
+
+    // Listen for new screenshots
+    window.electron.onScreenshotTaken(screenshot => {
+      setScreenshots(prev => [...prev, screenshot]);
+    });
+
+    // Listen for queue reset
+    window.electron.onQueueReset(() => {
+      setScreenshots([]);
+    });
+  }, []);
   const handleMinimize = () => {
     if (window.electron) window.electron.minimize();
   };
   const handleClose = () => {
     if (window.electron) window.electron.close();
+  };
+  const handleTakeScreenshot = async () => {
+    if (screenshots.length >= 4) return;
+    await window.electron.takeScreenshot();
+  };
+  const handleProcess = async () => {
+    setIsProcessing(true);
+    setResult(null);
+    await window.electron.processScreenshots();
+  };
+  const handleReset = async () => {
+    await window.electron.resetQueue();
+  };
+  const handleQuit = () => {
+    window.electron.quit();
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "app"
@@ -34028,11 +34128,38 @@ const App = () => {
     className: "control close",
     onClick: handleClose,
     title: "Close"
-  }, "\xD7")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Welcome to Your Electron React App!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, "\xD7")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Screenshot Processor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcuts-info"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Cmd/Ctrl + H"), " - Take Screenshot"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Cmd/Ctrl + Enter"), " - Process Queue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Cmd/Ctrl + R"), " - Reset Queue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Cmd/Ctrl + B"), " - Toggle Window"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "Cmd/Ctrl + Q"), " - Quit App")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "status"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Screenshots in queue: ", screenshots.length, "/4"), isProcessing && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "processing"
+  }, "Processing..."), result && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "result"
+  }, result)), screenshots.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "preview-grid"
+  }, screenshots.map(screenshot => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    key: screenshot.id,
+    className: "preview-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: screenshot.preview,
+    alt: "Screenshot preview"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "actions"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: () => setCount(count + 1)
-  }, "Count is ", count), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Edit ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "src/renderer/App.tsx"), " and save to test HMR")));
+    onClick: handleTakeScreenshot,
+    disabled: isProcessing || screenshots.length >= 4
+  }, "Take Screenshot"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: handleProcess,
+    disabled: isProcessing || screenshots.length === 0
+  }, "Process Queue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: handleReset,
+    disabled: isProcessing && screenshots.length === 0
+  }, "Reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: handleQuit
+  }, "Quit"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
