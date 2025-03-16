@@ -20,7 +20,7 @@ async function processScreenshots(screenshots) {
                 content: `You are an expert coding interview assistant. Analyze the coding question from the screenshots and provide a solution in ${language}.
                  Return the response in the following JSON format:
                  {
-                   "approach": "Detailed explanation of the approach",
+                   "approach": "Detailed approach to solve the problem on how are we solving the problem, that the interviewee will speak out loud and in easy explainatory words",
                    "code": "The complete solution code",
                    "timeComplexity": "Big O analysis of time complexity",
                    "spaceComplexity": "Big O analysis of space complexity"

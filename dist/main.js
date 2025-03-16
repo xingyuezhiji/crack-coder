@@ -168,10 +168,16 @@ async function handleProcessScreenshots() {
     mainWindow?.webContents.send('processing-started');
     try {
         const result = await openai_1.default.processScreenshots(screenshotQueue);
+        // Check if processing was cancelled
+        if (!isProcessing)
+            return;
         mainWindow?.webContents.send('processing-complete', JSON.stringify(result));
     }
     catch (error) {
         console.error('Error processing screenshots:', error);
+        // Check if processing was cancelled
+        if (!isProcessing)
+            return;
         mainWindow?.webContents.send('processing-complete', JSON.stringify({
             approach: 'Error processing screenshots',
             code: 'Error occurred',
@@ -184,6 +190,16 @@ async function handleProcessScreenshots() {
     }
 }
 async function handleResetQueue() {
+    // Cancel any ongoing processing
+    if (isProcessing) {
+        isProcessing = false;
+        mainWindow?.webContents.send('processing-complete', JSON.stringify({
+            approach: 'Processing cancelled',
+            code: '',
+            timeComplexity: '',
+            spaceComplexity: ''
+        }));
+    }
     // Delete all screenshot files
     for (const screenshot of screenshotQueue) {
         try {
@@ -194,7 +210,6 @@ async function handleResetQueue() {
         }
     }
     screenshotQueue = [];
-    isProcessing = false;
     mainWindow?.webContents.send('queue-reset');
 }
 function handleToggleVisibility() {
