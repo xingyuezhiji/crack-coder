@@ -21,25 +21,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.app {
+___CSS_LOADER_EXPORT___.push([module.id, `body {
+  margin: 0;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: transparent;
+}
+
+.app {
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f0f0f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card {
   padding: 2em;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 button {
@@ -47,24 +53,72 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: rgba(26, 26, 26, 0.9);
   color: white;
   cursor: pointer;
   border: none;
   border-radius: 8px;
-  transition: background-color 0.25s;
+  transition: all 0.25s ease;
 }
 
 button:hover {
-  background-color: #2c2c2c;
+  background-color: rgba(44, 44, 44, 0.9);
+  transform: translateY(-1px);
 }
 
 code {
-  background-color: #f1f1f1;
+  background-color: rgba(241, 241, 241, 0.8);
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-family: monospace;
-} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,cAAc;EACd,aAAa;EACb,kBAAkB;EAClB,uBAAuB;EACvB,kBAAkB;EAClB,qCAAqC;AACvC;;AAEA;EACE,SAAS;EACT,aAAa;EACb,gGAAgG;EAChG,yBAAyB;AAC3B;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,oBAAoB;EACpB,cAAc;EACd,gBAAgB;EAChB,oBAAoB;EACpB,yBAAyB;EACzB,YAAY;EACZ,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,kCAAkC;AACpC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,yBAAyB;EACzB,oBAAoB;EACpB,kBAAkB;EAClB,sBAAsB;AACxB","sourcesContent":[".app {\n  max-width: 800px;\n  margin: 0 auto;\n  padding: 2rem;\n  text-align: center;\n  background-color: white;\n  border-radius: 8px;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n}\n\nbody {\n  margin: 0;\n  padding: 20px;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n  background-color: #f0f0f0;\n}\n\n.card {\n  padding: 2em;\n}\n\nbutton {\n  padding: 0.6em 1.2em;\n  font-size: 1em;\n  font-weight: 500;\n  font-family: inherit;\n  background-color: #1a1a1a;\n  color: white;\n  cursor: pointer;\n  border: none;\n  border-radius: 8px;\n  transition: background-color 0.25s;\n}\n\nbutton:hover {\n  background-color: #2c2c2c;\n}\n\ncode {\n  background-color: #f1f1f1;\n  padding: 0.2em 0.4em;\n  border-radius: 4px;\n  font-family: monospace;\n} "],"sourceRoot":""}]);
+}
+
+/* Add a draggable region for window dragging since we removed the frame */
+.app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  -webkit-app-region: drag;
+}
+
+.window-controls {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.control {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgba(0, 0, 0, 0.7);
+  transition: all 0.2s ease;
+}
+
+.control:hover {
+  transform: none;
+}
+
+.control.minimize:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.control.close:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,aAAa;EACb,gGAAgG;EAChG,uBAAuB;AACzB;;AAEA;EACE,gBAAgB;EAChB,cAAc;EACd,aAAa;EACb,kBAAkB;EAClB,0CAA0C;EAC1C,2BAA2B;EAC3B,mCAAmC;EACnC,kBAAkB;EAClB,wCAAwC;AAC1C;;AAEA;EACE,YAAY;EACZ,0CAA0C;EAC1C,kBAAkB;EAClB,0BAA0B;EAC1B,kCAAkC;AACpC;;AAEA;EACE,oBAAoB;EACpB,cAAc;EACd,gBAAgB;EAChB,oBAAoB;EACpB,uCAAuC;EACvC,YAAY;EACZ,eAAe;EACf,YAAY;EACZ,kBAAkB;EAClB,0BAA0B;AAC5B;;AAEA;EACE,uCAAuC;EACvC,2BAA2B;AAC7B;;AAEA;EACE,0CAA0C;EAC1C,oBAAoB;EACpB,kBAAkB;EAClB,sBAAsB;AACxB;;AAEA,0EAA0E;AAC1E;EACE,WAAW;EACX,eAAe;EACf,MAAM;EACN,OAAO;EACP,QAAQ;EACR,YAAY;EACZ,wBAAwB;AAC1B;;AAEA;EACE,eAAe;EACf,QAAQ;EACR,UAAU;EACV,aAAa;EACb,QAAQ;EACR,aAAa;AACf;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,kBAAkB;EAClB,0CAA0C;EAC1C,yBAAyB;EACzB,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,0CAA0C;AAC5C;;AAEA;EACE,sCAAsC;EACtC,YAAY;AACd","sourcesContent":["body {\n  margin: 0;\n  padding: 20px;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n  background: transparent;\n}\n\n.app {\n  max-width: 800px;\n  margin: 0 auto;\n  padding: 2rem;\n  text-align: center;\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n}\n\n.card {\n  padding: 2em;\n  background-color: rgba(255, 255, 255, 0.5);\n  border-radius: 8px;\n  backdrop-filter: blur(5px);\n  -webkit-backdrop-filter: blur(5px);\n}\n\nbutton {\n  padding: 0.6em 1.2em;\n  font-size: 1em;\n  font-weight: 500;\n  font-family: inherit;\n  background-color: rgba(26, 26, 26, 0.9);\n  color: white;\n  cursor: pointer;\n  border: none;\n  border-radius: 8px;\n  transition: all 0.25s ease;\n}\n\nbutton:hover {\n  background-color: rgba(44, 44, 44, 0.9);\n  transform: translateY(-1px);\n}\n\ncode {\n  background-color: rgba(241, 241, 241, 0.8);\n  padding: 0.2em 0.4em;\n  border-radius: 4px;\n  font-family: monospace;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n} "],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -33956,9 +34010,25 @@ __webpack_require__.r(__webpack_exports__);
 
 const App = () => {
   const [count, setCount] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  const handleMinimize = () => {
+    if (window.electron) window.electron.minimize();
+  };
+  const handleClose = () => {
+    if (window.electron) window.electron.close();
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Welcome to Your Electron React App!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "window-controls"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "control minimize",
+    onClick: handleMinimize,
+    title: "Minimize"
+  }, "\u2212"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "control close",
+    onClick: handleClose,
+    title: "Close"
+  }, "\xD7")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Welcome to Your Electron React App!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "card"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: () => setCount(count + 1)

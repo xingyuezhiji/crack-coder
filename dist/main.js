@@ -35,16 +35,33 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
 const path = __importStar(require("path"));
+let mainWindow = null;
 function createWindow() {
-    // Create the browser window.
-    const mainWindow = new electron_1.BrowserWindow({
+    // Create the browser window with invisibility and transparency settings
+    mainWindow = new electron_1.BrowserWindow({
         width: 800,
         height: 600,
+        frame: false, // Removes window chrome/frame
+        transparent: true, // Enables window transparency
+        backgroundColor: "#00000000", // Fully transparent background
+        hasShadow: false, // Removes window shadows
+        alwaysOnTop: true, // Keeps window above others
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false
+            contextIsolation: true,
+            preload: path.join(__dirname, 'preload.js')
         }
     });
+    // Enable content protection to prevent screen capture
+    mainWindow.setContentProtection(true);
+    // Platform specific enhancements for macOS
+    if (process.platform === 'darwin') {
+        mainWindow.setHiddenInMissionControl(true);
+        mainWindow.setVisibleOnAllWorkspaces(true, {
+            visibleOnFullScreen: true
+        });
+        mainWindow.setAlwaysOnTop(true, "floating");
+    }
     // Load the index.html file from the dist directory
     mainWindow.loadFile(path.join(__dirname, '../dist/renderer/index.html'));
     // Open the DevTools in development
@@ -63,4 +80,19 @@ electron_1.app.whenReady().then(() => {
 electron_1.app.on('window-all-closed', function () {
     if (process.platform !== 'darwin')
         electron_1.app.quit();
+});
+// Handle window control events
+electron_1.ipcMain.on('minimize-window', () => {
+    mainWindow?.minimize();
+});
+electron_1.ipcMain.on('maximize-window', () => {
+    if (mainWindow?.isMaximized()) {
+        mainWindow?.unmaximize();
+    }
+    else {
+        mainWindow?.maximize();
+    }
+});
+electron_1.ipcMain.on('close-window', () => {
+    mainWindow?.close();
 });

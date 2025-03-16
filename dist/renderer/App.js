@@ -37,7 +37,18 @@ const react_1 = __importStar(require("react"));
 require("./App.css");
 const App = () => {
     const [count, setCount] = (0, react_1.useState)(0);
+    const handleMinimize = () => {
+        if (window.electron)
+            window.electron.minimize();
+    };
+    const handleClose = () => {
+        if (window.electron)
+            window.electron.close();
+    };
     return (react_1.default.createElement("div", { className: "app" },
+        react_1.default.createElement("div", { className: "window-controls" },
+            react_1.default.createElement("button", { className: "control minimize", onClick: handleMinimize, title: "Minimize" }, "\u2212"),
+            react_1.default.createElement("button", { className: "control close", onClick: handleClose, title: "Close" }, "\u00D7")),
         react_1.default.createElement("h1", null, "Welcome to Your Electron React App!"),
         react_1.default.createElement("div", { className: "card" },
             react_1.default.createElement("button", { onClick: () => setCount(count + 1) },
