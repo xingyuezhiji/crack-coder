@@ -66,8 +66,8 @@ export async function processScreenshots(screenshots: { path: string }[]): Promi
                  {
                    "approach": "Detailed approach to solve the problem on how are we solving the problem, that the interviewee will speak out loud and in easy explainatory words",
                    "code": "The complete solution code",
-                   "timeComplexity": "Big O analysis of time complexity",
-                   "spaceComplexity": "Big O analysis of space complexity"
+                   "timeComplexity": "Big O analysis of time complexity with the reason",
+                   "spaceComplexity": "Big O analysis of space complexity with the reason"
                  }`
       },
       {
