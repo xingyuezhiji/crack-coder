@@ -61,11 +61,17 @@ APP_LANGUAGE="Java"  # Or Python, JavaScript, C++, etc.
    Simply launch the application if you used the direct download
    ```
 
-## How It Works
-- The tool operates completely invisibly in the background
-- No visible UI elements or screen modifications
-- Bypasses all known screen monitoring systems
-- Provides suggestions through an undetectable interface
+## Shortcuts
+
+### General Shortcuts
+
+- **Screenshot**: ⌘/Ctrl + H
+- **Solution**: ⌘/Ctrl + ↵/Enter
+- **Reset**: ⌘/Ctrl + R
+- **Show/Hide**: ⌘/Ctrl + B
+- **Settings/Config (Configure your preferred coding language and OpenAI API key)**: ⌘/Ctrl + P 
+- **Quit**: ⌘/Ctrl + Q
+- **Move Around**: ⌘/Ctrl + Arrow Keys
 
 ## Contributing
 We welcome contributions! Please feel free to submit a Pull Request.
