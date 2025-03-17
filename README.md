@@ -1,6 +1,6 @@
-# CrackCode - AI-Powered DSA Interview Assistant
+# CrackCode - Invisible AI-Powered Interview Assistant
 
-A powerful, completely invisible AI tool for solving Data Structures and Algorithms (DSA) questions during coding interviews. The tool runs 100% undetectably in the background - no screen recording or monitoring software can identify its presence.
+A powerful, completely invisible AI tool for solving Coding questions during technical interviews. The tool runs 100% undetectably in the background - no screen recording or monitoring software can identify its presence.
 
 ## Demo
  VideoLink
@@ -8,22 +8,13 @@ A powerful, completely invisible AI tool for solving Data Structures and Algorit
 ## Features
 
 - 🔒 100% Undetectable - Completely invisible to all screen recording and monitoring software
-- 🤖 Real-time AI assistance for solving DSA problems
+- 🤖 Real-time AI assistance for solving Coding problems
 - 🌐 Support for multiple programming languages
-- ⚡ Lightning-fast responses
 - 🎯 Precise, contextual coding suggestions
 - ⚙️ Easy configuration setup
 
-## Installation Options
 
-### Option 1: Direct Download
-1. Download the pre-built application:
-   - [Download for Windows](https://example.com/download/windows)
-   - [Download for macOS](https://example.com/download/macos)
-2. Run the installer
-3. Launch CrackCode and configure your API key
-
-### Option 2: Local Setup
+### Local Setup
 
 1. Clone the repository:
    ```bash
@@ -71,16 +62,13 @@ APP_LANGUAGE="Java"  # Or Python, JavaScript, C++, etc.
    ```
 
 ## How It Works
-
 - The tool operates completely invisibly in the background
 - No visible UI elements or screen modifications
 - Bypasses all known screen monitoring systems
 - Provides suggestions through an undetectable interface
 
 ## Contributing
-
 We welcome contributions! Please feel free to submit a Pull Request.
 
 ## Support
-
 If you find this tool helpful, please consider giving it a star ⭐️
