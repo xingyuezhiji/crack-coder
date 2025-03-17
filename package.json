@@ -1,7 +1,7 @@
 {
-  "name": "electron-app",
+  "name": "crackcoder",
   "version": "1.0.0",
-  "description": "A basic Electron application",
+  "description": "ai app for technical interviews",
   "main": "dist/main.js",
   "scripts": {
     "start": "npm run build && electron .",

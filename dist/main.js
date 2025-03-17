@@ -44,6 +44,7 @@ const util_1 = require("util");
 const openai_1 = __importDefault(require("./services/openai"));
 const execFileAsync = (0, util_1.promisify)(child_process_1.execFile);
 const CONFIG_FILE = path.join(electron_1.app.getPath('userData'), 'config.json');
+console.log(CONFIG_FILE);
 let config = null;
 let mainWindow = null;
 let screenshotQueue = [];
@@ -90,15 +91,14 @@ async function saveConfig(newConfig) {
     }
 }
 function createWindow() {
-    // Create the browser window with invisibility and transparency settings
     mainWindow = new electron_1.BrowserWindow({
         width: 800,
         height: 600,
-        frame: false, // Removes window chrome/frame
-        transparent: true, // Enables window transparency
-        backgroundColor: "#00000000", // Fully transparent background
-        hasShadow: false, // Removes window shadows
-        alwaysOnTop: true, // Keeps window above others
+        frame: false,
+        transparent: true,
+        backgroundColor: "#00000000",
+        hasShadow: false,
+        alwaysOnTop: true,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: true,

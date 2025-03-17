@@ -40,7 +40,7 @@ if (process.env.OPENAI_API_KEY) {
 }
 async function processScreenshots(screenshots) {
     if (!openai) {
-        throw new Error('OpenAI client not initialized. Please configure API key first.');
+        throw new Error('OpenAI client not initialized. Please configure API key first. Click CTRL/CMD + P to open settings and set the API key.');
     }
     try {
         const messages = [
@@ -51,8 +51,8 @@ async function processScreenshots(screenshots) {
                  {
                    "approach": "Detailed approach to solve the problem on how are we solving the problem, that the interviewee will speak out loud and in easy explainatory words",
                    "code": "The complete solution code",
-                   "timeComplexity": "Big O analysis of time complexity",
-                   "spaceComplexity": "Big O analysis of space complexity"
+                   "timeComplexity": "Big O analysis of time complexity with the reason",
+                   "spaceComplexity": "Big O analysis of space complexity with the reason"
                  }`
             },
             {

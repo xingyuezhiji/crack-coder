@@ -54,7 +54,7 @@ type MessageContent =
 
 export async function processScreenshots(screenshots: { path: string }[]): Promise<ProcessedSolution> {
   if (!openai) {
-    throw new Error('OpenAI client not initialized. Please configure API key first.');
+    throw new Error('OpenAI client not initialized. Please configure API key first. Click CTRL/CMD + P to open settings and set the API key.');
   }
 
   try {

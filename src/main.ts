@@ -14,6 +14,7 @@ interface Screenshot {
 }
 
 const CONFIG_FILE = path.join(app.getPath('userData'), 'config.json');
+console.log(CONFIG_FILE);
 
 interface Config {
   apiKey: string;
@@ -68,15 +69,14 @@ async function saveConfig(newConfig: Config): Promise<void> {
 }
 
 function createWindow() {
-  // Create the browser window with invisibility and transparency settings
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    frame: false,           // Removes window chrome/frame
-    transparent: true,      // Enables window transparency
-    backgroundColor: "#00000000",  // Fully transparent background
-    hasShadow: false,      // Removes window shadows
-    alwaysOnTop: true,     // Keeps window above others
+    frame: false,           
+    transparent: true,     
+    backgroundColor: "#00000000",  
+    hasShadow: false,    
+    alwaysOnTop: true,     
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,

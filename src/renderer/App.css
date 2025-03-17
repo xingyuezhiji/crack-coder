@@ -156,12 +156,13 @@ body {
   display: none;
   position: absolute;
   right: 100%;
-  top: calc(50% + 20px);
-  transform: translateY(-50%);
+  top: 0;
+  transform: translateY(0);
   background-color: rgba(7, 8, 9, 0.9);
   padding: 1rem 1.5rem;
   border-radius: 4px;
   margin-right: 10px;
+  margin-top: -10px;
   flex-direction: column;
   gap: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -177,8 +178,8 @@ body {
   content: "";
   position: absolute;
   right: -5px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 20px;
+  transform: translateY(0);
   border-left: 5px solid rgba(7, 8, 9, 0.9);
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
