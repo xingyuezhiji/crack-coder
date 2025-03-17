@@ -22,7 +22,7 @@ function updateConfig(config: Config) {
       apiKey: config.apiKey.trim(),
     });
     language = config.language || 'Python';
-    console.log('OpenAI client initialized with new config');
+    // console.log('OpenAI client initialized with new config');
   } catch (error) {
     console.error('Error initializing OpenAI client:', error);
     throw error;

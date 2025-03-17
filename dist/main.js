@@ -61,10 +61,21 @@ async function ensureScreenshotDir() {
 }
 async function loadConfig() {
     try {
+        // First try loading from environment variables
+        const envApiKey = process.env.OPENAI_API_KEY;
+        const envLanguage = process.env.APP_LANGUAGE;
+        if (envApiKey && envLanguage) {
+            const envConfig = {
+                apiKey: envApiKey,
+                language: envLanguage
+            };
+            openai_1.default.updateConfig(envConfig);
+            return envConfig;
+        }
+        // If env vars not found, try loading from config file
         const data = await fs.readFile(CONFIG_FILE, 'utf-8');
         const loadedConfig = JSON.parse(data);
         if (loadedConfig && loadedConfig.apiKey && loadedConfig.language) {
-            // Update OpenAI service with loaded config
             openai_1.default.updateConfig(loadedConfig);
             return loadedConfig;
         }
