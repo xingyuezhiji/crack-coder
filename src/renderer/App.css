@@ -156,7 +156,7 @@ body {
   display: none;
   position: absolute;
   right: 100%;
-  top: 50%;
+  top: calc(50% + 20px);
   transform: translateY(-50%);
   background-color: rgba(7, 8, 9, 0.9);
   padding: 1rem 1.5rem;

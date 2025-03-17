@@ -60,6 +60,7 @@ const ConfigScreen = ({ onSave, initialConfig }) => {
                         react_1.default.createElement("option", { value: "TypeScript" }, "TypeScript"),
                         react_1.default.createElement("option", { value: "Java" }, "Java"),
                         react_1.default.createElement("option", { value: "C++" }, "C++"),
+                        react_1.default.createElement("option", { value: "C" }, "C"),
                         react_1.default.createElement("option", { value: "Go" }, "Go"),
                         react_1.default.createElement("option", { value: "Rust" }, "Rust"))),
                 react_1.default.createElement("div", { className: "form-actions" },
