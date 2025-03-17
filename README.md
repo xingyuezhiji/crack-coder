@@ -29,7 +29,7 @@ https://github.com/user-attachments/assets/179701eb-0fcf-4e33-86f3-c92688f508a5
    npm install
    ```
 
-3. Configure environment variables:
+3. Configure environment variables:(Or set these in the Settings ⌘/Ctrl + P )
    - Copy `.env.example` to `.env`
    - Add your OpenAI API key
    - Set your preferred programming language
