@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import ConfigScreen from './ConfigScreen';
 
 interface Screenshot {
   id: number;
@@ -14,6 +15,11 @@ interface ProcessedSolution {
   spaceComplexity: string;
 }
 
+interface Config {
+  apiKey: string;
+  language: string;
+}
+
 declare global {
   interface Window {
     electron: {
@@ -24,10 +30,13 @@ declare global {
       takeScreenshot: () => Promise<void>;
       processScreenshots: () => Promise<void>;
       resetQueue: () => Promise<void>;
+      getConfig: () => Promise<Config | null>;
+      saveConfig: (config: Config) => Promise<boolean>;
       onProcessingComplete: (callback: (result: string) => void) => void;
       onScreenshotTaken: (callback: (data: Screenshot) => void) => void;
       onProcessingStarted: (callback: () => void) => void;
       onQueueReset: (callback: () => void) => void;
+      onShowConfig: (callback: () => void) => void;
     };
   }
 }
@@ -36,9 +45,29 @@ const App: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [result, setResult] = useState<ProcessedSolution | null>(null);
   const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
+  const [showConfig, setShowConfig] = useState(false);
+  const [config, setConfig] = useState<Config | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadConfig = async () => {
+      const savedConfig = await window.electron.getConfig();
+      setConfig(savedConfig);
+      if (!savedConfig) {
+        setShowConfig(true);
+      }
+    };
+
+    loadConfig();
+  }, []);
 
   useEffect(() => {
     console.log('Setting up event listeners...');
+
+    // Listen for show config events
+    window.electron.onShowConfig(() => {
+      setShowConfig(prev => !prev);
+    });
 
     // Listen for processing started events
     window.electron.onProcessingStarted(() => {
@@ -66,6 +95,12 @@ const App: React.FC = () => {
         case 'r':
           console.log('Reset hotkey pressed');
           await handleReset();
+          break;
+        case 'p':
+          if (isCmdOrCtrl) {
+            console.log('Toggle config hotkey pressed');
+            setShowConfig(prev => !prev);
+          }
           break;
         case 'b':
           if (isCmdOrCtrl) {
@@ -121,6 +156,15 @@ const App: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 5000); // Hide error after 5 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
   const handleTakeScreenshot = async () => {
     console.log('Taking screenshot, current count:', screenshots.length);
     if (screenshots.length >= 4) {
@@ -143,11 +187,13 @@ const App: React.FC = () => {
     }
     setIsProcessing(true);
     setResult(null);
+    setError(null);
     try {
       await window.electron.processScreenshots();
       console.log('Process request sent successfully');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error processing screenshots:', error);
+      setError(error?.message || 'Error processing screenshots');
       setIsProcessing(false);
     }
   };
@@ -160,6 +206,22 @@ const App: React.FC = () => {
   const handleQuit = () => {
     console.log('Quitting application...');
     window.electron.quit();
+  };
+
+  const handleConfigSave = async (newConfig: Config) => {
+    try {
+      const success = await window.electron.saveConfig(newConfig);
+      if (success) {
+        setConfig(newConfig);
+        setShowConfig(false);
+        setError(null);
+      } else {
+        setError('Failed to save configuration');
+      }
+    } catch (error: any) {
+      console.error('Error saving configuration:', error);
+      setError(error?.message || 'Error saving configuration');
+    }
   };
 
   // Log state changes
@@ -182,13 +244,32 @@ const App: React.FC = () => {
 
   return (
     <div className="app">
+      {error && (
+        <div className="error-bar">
+          <span>{error}</span>
+          <button onClick={() => setError(null)}>&times;</button>
+        </div>
+      )}
+      {showConfig && (
+        <ConfigScreen
+          onSave={handleConfigSave}
+          initialConfig={config || undefined}
+        />
+      )}
+      
       {/* Preview Row */}
       <div className="shortcuts-row">
         <div className="shortcut"><code>⌘/Ctrl + H</code> Screenshot</div>
         <div className="shortcut"><code>⌘/Ctrl + ↵</code> Solution</div>
         <div className="shortcut"><code>⌘/Ctrl + R</code> Reset</div>
-        <div className="shortcut"><code>⌘/Ctrl + B</code> Toggle</div>
-        <div className="shortcut"><code>⌘/Ctrl + Q</code> Quit</div>
+        <div className="hover-shortcuts">
+          <div className="hover-shortcuts-content">
+            <div className="shortcut"><code>⌘/Ctrl + B</code> Show/Hide</div>
+            <div className="shortcut"><code>⌘/Ctrl + P</code> Settings</div>
+            <div className="shortcut"><code>⌘/Ctrl + Q</code> Quit</div>
+            <div className="shortcut"><code>⌘/Ctrl + Arrow Keys</code> Move Around</div>
+          </div>
+        </div>
       </div>
       <div className="preview-row">
         {screenshots.map(screenshot => (
@@ -205,7 +286,7 @@ const App: React.FC = () => {
         ) : result ? (
           <div className="result">
             <div className="solution-section">
-              <h3>My Thoughts</h3>
+              <h3>Approach</h3>
               <p>{result.approach}</p>
             </div>
             <div className="solution-section">
@@ -229,9 +310,6 @@ const App: React.FC = () => {
           </div>
         )}
       </div>
-
-      {/* Shortcuts Row */}
- 
     </div>
   );
 };

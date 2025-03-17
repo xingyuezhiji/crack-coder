@@ -47,7 +47,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   display: flex;
   gap: 0.5rem;
   padding: 0.5rem;
-  background-color: rgba(30, 33, 40, 0.4);
+  background-color: rgba(7, 8, 9, 0.4);
   border-radius: 4px;
   min-height: 60px;
   align-items: center;
@@ -75,7 +75,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: rgba(30, 33, 40, 0.4);
+  background-color: rgba(7, 8, 9, 0.4);
   border-radius: 4px;
   min-height: 24px;
 }
@@ -93,18 +93,18 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.25rem;
 }
 
 .solution-section {
-  background: rgba(30, 33, 40, 0.4);
-  border-radius: 4px;
+  margin: 0.25rem 0;
   padding: 1rem;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
 }
 
 .solution-section h3 {
-  color: #e8ebef;
+  color: #edf1f5;
   font-size: 0.8rem;
   margin: 0 0 0.5rem 0;
   font-weight: normal;
@@ -127,8 +127,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
 .solution-section p {
   margin: 0.5rem 0;
   line-height: 1.5;
-  color: #abb2bf;
+  color: #c6c9cc;
   font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 4px;
 }
 
 .empty-status {
@@ -146,9 +149,62 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
-  background-color: rgba(30, 33, 40, 0.4);
+  background-color: rgba(7, 8, 9, 0.4);
   border-radius: 4px;
   font-size: 0.6rem;
+  position: relative;
+}
+
+.hover-shortcuts {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hover-shortcuts::before {
+  content: "?";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(97, 175, 239, 0.2);
+  border-radius: 50%;
+  color: #61afef;
+  cursor: help;
+}
+
+.hover-shortcuts-content {
+  display: none;
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(7, 8, 9, 0.9);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  margin-right: 10px;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  min-width: 180px;
+  white-space: nowrap;
+}
+
+.hover-shortcuts:hover .hover-shortcuts-content {
+  display: flex;
+}
+
+.hover-shortcuts-content::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 5px solid rgba(7, 8, 9, 0.9);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
 }
 
 .shortcut {
@@ -177,8 +233,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
 
 .hint {
   font-size: 0.8rem;
-  color: #5c6370;
+  color: #dbdce0;
   margin-top: 0.5rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Add a draggable region for window dragging since we removed the frame */
@@ -283,6 +342,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
 .solution-section p {
   margin: 0.5rem 0;
   line-height: 1.5;
+  color: #c6c9cc;
 }
 
 .code-line {
@@ -312,7 +372,237 @@ code {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
   font-size: 0.9rem;
   color: #abb2bf;
-} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,aAAa;EACb,oEAAoE;EACpE,uBAAuB;EACvB,cAAc;AAChB;;AAEA;EACE,eAAe;EACf,cAAc;EACd,aAAa;EACb,wCAAwC;EACxC,0BAA0B;EAC1B,kCAAkC;EAClC,kBAAkB;EAClB,yCAAyC;EACzC,aAAa;EACb,sBAAsB;EACtB,SAAS;AACX;;AAEA;EACE,aAAa;EACb,WAAW;EACX,eAAe;EACf,uCAAuC;EACvC,kBAAkB;EAClB,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA;EACE,kBAAkB;EAClB,WAAW;EACX,YAAY;EACZ,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;EACxC,cAAc;AAChB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,aAAa;EACb,uCAAuC;EACvC,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,gBAAgB;EAChB,iBAAiB;EACjB,kBAAkB;EAClB,mBAAmB;AACrB;;AAEA;EACE,cAAc;EACd,gBAAgB;EAChB,aAAa;EACb,sBAAsB;EACtB,WAAW;AACb;;AAEA;EACE,iCAAiC;EACjC,kBAAkB;EAClB,aAAa;EACb,sHAAsH;AACxH;;AAEA;EACE,cAAc;EACd,iBAAiB;EACjB,oBAAoB;EACpB,mBAAmB;AACrB;;AAEA;EACE,SAAS;EACT,aAAa;EACb,8BAA8B;EAC9B,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,oEAAoE;EACpE,iBAAiB;EACjB,cAAc;AAChB;;AAEA;EACE,gBAAgB;EAChB,gBAAgB;EAChB,cAAc;EACd,iBAAiB;AACnB;;AAEA;EACE,cAAc;EACd,iBAAiB;EACjB,mBAAmB;EACnB,uBAAuB;EACvB,aAAa;EACb,sBAAsB;AACxB;;AAEA;EACE,aAAa;EACb,SAAS;EACT,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,uCAAuC;EACvC,kBAAkB;EAClB,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,YAAY;EACZ,cAAc;EACd,iBAAiB;AACnB;;AAEA;EACE,oCAAoC;EACpC,oBAAoB;EACpB,kBAAkB;EAClB,oEAAoE;EACpE,cAAc;EACd,iBAAiB;AACnB;;AAEA,wCAAwC;AACxC,WAAW,cAAc,EAAE;AAC3B,WAAW,cAAc,EAAE;AAC3B,UAAU,cAAc,EAAE;AAC1B,UAAU,cAAc,EAAE;AAC1B,YAAY,cAAc,EAAE;;AAE5B;EACE,iBAAiB;EACjB,cAAc;EACd,kBAAkB;AACpB;;AAEA,0EAA0E;AAC1E;EACE,WAAW;EACX,eAAe;EACf,MAAM;EACN,OAAO;EACP,QAAQ;EACR,YAAY;EACZ,wBAAwB;AAC1B;;AAEA;EACE,eAAe;EACf,QAAQ;EACR,UAAU;EACV,aAAa;EACb,QAAQ;EACR,aAAa;AACf;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,UAAU;EACV,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,eAAe;EACf,kBAAkB;EAClB,0CAA0C;EAC1C,yBAAyB;EACzB,yBAAyB;AAC3B;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,0CAA0C;AAC5C;;AAEA;EACE,sCAAsC;EACtC,YAAY;AACd;;AAEA;EACE,aAAa;EACb,qCAAqC;EACrC,SAAS;EACT,cAAc;EACd,aAAa;EACb,qCAAqC;EACrC,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;EAChB,oCAAoC;EACpC,wCAAwC;AAC1C;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;AACpB;;AAEA;EACE,cAAc;EACd,aAAa;EACb,oCAAoC;EACpC,kBAAkB;AACpB;;AAEA;EACE,oBAAoB;EACpB,cAAc;EACd,iBAAiB;AACnB;;AAEA;EACE,SAAS;EACT,aAAa;EACb,8BAA8B;EAC9B,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,mCAAmC;EACnC,iBAAiB;AACnB;;AAEA;EACE,gBAAgB;EAChB,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,oEAAoE;EACpE,gBAAgB;EAChB,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,iBAAiB;EACjB,kBAAkB;EAClB,iBAAiB;EACjB,cAAc;AAChB;;AAEA;EACE,SAAS;EACT,aAAa;EACb,8BAA8B;EAC9B,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA;EACE,oEAAoE;EACpE,iBAAiB;EACjB,cAAc;AAChB","sourcesContent":["body {\n  margin: 0;\n  padding: 10px;\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  background: transparent;\n  color: #e0e0e0;\n}\n\n.app {\n  max-width: 100%;\n  margin: 0 auto;\n  padding: 1rem;\n  background-color: rgba(70, 73, 78, 0.65);\n  backdrop-filter: blur(8px);\n  -webkit-backdrop-filter: blur(8px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n}\n\n.preview-row {\n  display: flex;\n  gap: 0.5rem;\n  padding: 0.5rem;\n  background-color: rgba(30, 33, 40, 0.4);\n  border-radius: 4px;\n  min-height: 60px;\n  align-items: center;\n}\n\n.preview-item {\n  position: relative;\n  width: 90px;\n  height: 60px;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.2);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  flex-shrink: 0;\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.status-row {\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n  background-color: rgba(30, 33, 40, 0.4);\n  border-radius: 4px;\n  min-height: 24px;\n}\n\n.processing {\n  color: #abb2bf;\n  font-weight: 500;\n  font-size: 0.7rem;\n  text-align: center;\n  align-items: center;\n}\n\n.result {\n  color: #98c379;\n  text-align: left;\n  display: flex;\n  flex-direction: column;\n  gap: 0.4rem;\n}\n\n.solution-section {\n  background: rgba(30, 33, 40, 0.4);\n  border-radius: 4px;\n  padding: 1rem;\n  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;\n}\n\n.solution-section h3 {\n  color: #e8ebef;\n  font-size: 0.8rem;\n  margin: 0 0 0.5rem 0;\n  font-weight: normal;\n}\n\n.solution-section pre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.2);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\n.solution-section code {\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  font-size: 0.9rem;\n  color: #abb2bf;\n}\n\n.solution-section p {\n  margin: 0.5rem 0;\n  line-height: 1.5;\n  color: #abb2bf;\n  font-size: 0.9rem;\n}\n\n.empty-status {\n  color: #abb2bf;\n  font-size: 0.6rem;\n  align-items: center;\n  justify-content: center;\n  display: flex;\n  flex-direction: column;\n}\n\n.shortcuts-row {\n  display: flex;\n  gap: 1rem;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(30, 33, 40, 0.4);\n  border-radius: 4px;\n  font-size: 0.6rem;\n}\n\n.shortcut {\n  display: flex;\n  align-items: center;\n  gap: 0.25rem;\n  color: #abb2bf;\n  font-size: 0.6rem;\n}\n\n.shortcut code {\n  background-color: rgba(0, 0, 0, 0.2);\n  padding: 0.2em 0.4em;\n  border-radius: 3px;\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  color: #61afef;\n  font-size: 0.6rem;\n}\n\n/* Syntax highlighting colors for code */\n.keyword { color: #c678dd; }\n.comment { color: #5c6370; }\n.string { color: #98c379; }\n.number { color: #d19a66; }\n.function { color: #61afef; }\n\n.hint {\n  font-size: 0.8rem;\n  color: #5c6370;\n  margin-top: 0.5rem;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n}\n\n.preview-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 1rem;\n  margin: 2rem 0;\n  padding: 1rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.preview-item {\n  position: relative;\n  aspect-ratio: 16/9;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.solution-section {\n  margin: 1rem 0;\n  padding: 1rem;\n  background: rgba(255, 255, 255, 0.1);\n  border-radius: 8px;\n}\n\n.solution-section h3 {\n  margin: 0 0 0.5rem 0;\n  color: #e8ebef;\n  font-size: 1.0rem;\n}\n\n.solution-section pre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\n.solution-section code {\n  font-family: 'Fira Code', monospace;\n  font-size: 0.9rem;\n}\n\n.solution-section p {\n  margin: 0.5rem 0;\n  line-height: 1.5;\n}\n\n.code-line {\n  display: flex;\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  line-height: 1.5;\n  white-space: pre;\n}\n\n.line-number {\n  color: #7c8089;\n  text-align: right;\n  padding-right: 1em;\n  user-select: none;\n  min-width: 2em;\n}\n\npre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\ncode {\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  font-size: 0.9rem;\n  color: #abb2bf;\n} "],"sourceRoot":""}]);
+}
+
+.error-bar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 59, 48, 0.9);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease-out;
+}
+
+.error-bar span {
+  font-size: 14px;
+}
+
+.error-bar button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.error-bar button:hover {
+  opacity: 1;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+} `, "",{"version":3,"sources":["webpack://./src/renderer/App.css"],"names":[],"mappings":"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","sourcesContent":["body {\n  margin: 0;\n  padding: 10px;\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  background: transparent;\n  color: #e0e0e0;\n}\n\n.app {\n  max-width: 100%;\n  margin: 0 auto;\n  padding: 1rem;\n  background-color: rgba(70, 73, 78, 0.65);\n  backdrop-filter: blur(8px);\n  -webkit-backdrop-filter: blur(8px);\n  border-radius: 8px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n}\n\n.preview-row {\n  display: flex;\n  gap: 0.5rem;\n  padding: 0.5rem;\n  background-color: rgba(7, 8, 9, 0.4);\n  border-radius: 4px;\n  min-height: 60px;\n  align-items: center;\n}\n\n.preview-item {\n  position: relative;\n  width: 90px;\n  height: 60px;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.2);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  flex-shrink: 0;\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.status-row {\n  display: flex;\n  flex-direction: column;\n  padding: 1rem;\n  background-color: rgba(7, 8, 9, 0.4);\n  border-radius: 4px;\n  min-height: 24px;\n}\n\n.processing {\n  color: #abb2bf;\n  font-weight: 500;\n  font-size: 0.7rem;\n  text-align: center;\n  align-items: center;\n}\n\n.result {\n  color: #98c379;\n  text-align: left;\n  display: flex;\n  flex-direction: column;\n  gap: 0.25rem;\n}\n\n.solution-section {\n  margin: 0.25rem 0;\n  padding: 1rem;\n  background: rgba(255, 255, 255, 0.1);\n  border-radius: 8px;\n}\n\n.solution-section h3 {\n  color: #edf1f5;\n  font-size: 0.8rem;\n  margin: 0 0 0.5rem 0;\n  font-weight: normal;\n}\n\n.solution-section pre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.2);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\n.solution-section code {\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  font-size: 0.9rem;\n  color: #abb2bf;\n}\n\n.solution-section p {\n  margin: 0.5rem 0;\n  line-height: 1.5;\n  color: #c6c9cc;\n  font-size: 0.9rem;\n  background: rgba(0, 0, 0, 0.3);\n  padding: 1rem;\n  border-radius: 4px;\n}\n\n.empty-status {\n  color: #abb2bf;\n  font-size: 0.6rem;\n  align-items: center;\n  justify-content: center;\n  display: flex;\n  flex-direction: column;\n}\n\n.shortcuts-row {\n  display: flex;\n  gap: 1rem;\n  align-items: center;\n  justify-content: center;\n  padding: 0.5rem;\n  background-color: rgba(7, 8, 9, 0.4);\n  border-radius: 4px;\n  font-size: 0.6rem;\n  position: relative;\n}\n\n.hover-shortcuts {\n  position: absolute;\n  right: 0.5rem;\n  top: 50%;\n  transform: translateY(-50%);\n}\n\n.hover-shortcuts::before {\n  content: \"?\";\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 20px;\n  height: 20px;\n  background-color: rgba(97, 175, 239, 0.2);\n  border-radius: 50%;\n  color: #61afef;\n  cursor: help;\n}\n\n.hover-shortcuts-content {\n  display: none;\n  position: absolute;\n  right: 100%;\n  top: 50%;\n  transform: translateY(-50%);\n  background-color: rgba(7, 8, 9, 0.9);\n  padding: 1rem 1.5rem;\n  border-radius: 4px;\n  margin-right: 10px;\n  flex-direction: column;\n  gap: 0.5rem;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);\n  min-width: 180px;\n  white-space: nowrap;\n}\n\n.hover-shortcuts:hover .hover-shortcuts-content {\n  display: flex;\n}\n\n.hover-shortcuts-content::after {\n  content: \"\";\n  position: absolute;\n  right: -5px;\n  top: 50%;\n  transform: translateY(-50%);\n  border-left: 5px solid rgba(7, 8, 9, 0.9);\n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n}\n\n.shortcut {\n  display: flex;\n  align-items: center;\n  gap: 0.25rem;\n  color: #abb2bf;\n  font-size: 0.6rem;\n}\n\n.shortcut code {\n  background-color: rgba(0, 0, 0, 0.2);\n  padding: 0.2em 0.4em;\n  border-radius: 3px;\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  color: #61afef;\n  font-size: 0.6rem;\n}\n\n/* Syntax highlighting colors for code */\n.keyword { color: #c678dd; }\n.comment { color: #5c6370; }\n.string { color: #98c379; }\n.number { color: #d19a66; }\n.function { color: #61afef; }\n\n.hint {\n  font-size: 0.8rem;\n  color: #dbdce0;\n  margin-top: 0.5rem;\n  text-align: center;\n  align-items: center;\n  justify-content: center;\n}\n\n/* Add a draggable region for window dragging since we removed the frame */\n.app::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 30px;\n  -webkit-app-region: drag;\n}\n\n.window-controls {\n  position: fixed;\n  top: 8px;\n  right: 8px;\n  display: flex;\n  gap: 8px;\n  z-index: 1000;\n}\n\n.control {\n  width: 24px;\n  height: 24px;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 18px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: rgba(0, 0, 0, 0.7);\n  transition: all 0.2s ease;\n}\n\n.control:hover {\n  transform: none;\n}\n\n.control.minimize:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n\n.control.close:hover {\n  background-color: rgba(255, 0, 0, 0.8);\n  color: white;\n}\n\n.preview-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 1rem;\n  margin: 2rem 0;\n  padding: 1rem;\n  background-color: rgba(0, 0, 0, 0.05);\n  border-radius: 8px;\n}\n\n.preview-item {\n  position: relative;\n  aspect-ratio: 16/9;\n  border-radius: 4px;\n  overflow: hidden;\n  background-color: rgba(0, 0, 0, 0.1);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n}\n\n.preview-item img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 4px;\n}\n\n.solution-section {\n  margin: 1rem 0;\n  padding: 1rem;\n  background: rgba(255, 255, 255, 0.1);\n  border-radius: 8px;\n}\n\n.solution-section h3 {\n  margin: 0 0 0.5rem 0;\n  color: #e8ebef;\n  font-size: 1.0rem;\n}\n\n.solution-section pre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\n.solution-section code {\n  font-family: 'Fira Code', monospace;\n  font-size: 0.9rem;\n}\n\n.solution-section p {\n  margin: 0.5rem 0;\n  line-height: 1.5;\n  color: #c6c9cc;\n}\n\n.code-line {\n  display: flex;\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  line-height: 1.5;\n  white-space: pre;\n}\n\n.line-number {\n  color: #7c8089;\n  text-align: right;\n  padding-right: 1em;\n  user-select: none;\n  min-width: 2em;\n}\n\npre {\n  margin: 0;\n  padding: 1rem;\n  background: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  overflow-x: auto;\n}\n\ncode {\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  font-size: 0.9rem;\n  color: #abb2bf;\n}\n\n.error-bar {\n  position: fixed;\n  top: 20px;\n  left: 50%;\n  transform: translateX(-50%);\n  background-color: rgba(255, 59, 48, 0.9);\n  color: white;\n  padding: 12px 20px;\n  border-radius: 8px;\n  z-index: 2000;\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n  animation: slideIn 0.3s ease-out;\n}\n\n.error-bar span {\n  font-size: 14px;\n}\n\n.error-bar button {\n  background: none;\n  border: none;\n  color: white;\n  font-size: 18px;\n  cursor: pointer;\n  padding: 0;\n  margin-left: 8px;\n  opacity: 0.8;\n  transition: opacity 0.2s;\n}\n\n.error-bar button:hover {\n  opacity: 1;\n}\n\n@keyframes slideIn {\n  from {\n    transform: translate(-50%, -100%);\n    opacity: 0;\n  }\n  to {\n    transform: translate(-50%, 0);\n    opacity: 1;\n  }\n} "],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/renderer/ConfigScreen.css":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/renderer/ConfigScreen.css ***!
+  \*****************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
+// Imports
+
+
+
+var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%237c8089%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e */ "data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%237c8089%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e"), __webpack_require__.b);
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `.config-screen {
+  position: fixed;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.config-container {
+  background: rgba(0, 0, 0, 0.688);
+  padding: 1rem;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.815);
+}
+
+.config-container h2 {
+  color: #edf1f5;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+.form-group {
+  margin-bottom: 0.75rem;
+}
+
+.form-group label {
+  display: block;
+  color: #edf1f5;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.api-key-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  height: 32px;
+  max-width: 100%;
+}
+
+.api-key-input input {
+  flex: 1;
+  padding: 0.4rem 0.75rem;
+  padding-right: 60px; /* Make space for the button */
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #c6c9cc;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  letter-spacing: 0.5px;
+  width: 100%;
+  height: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.api-key-input .toggle-visibility {
+  position: absolute;
+  right: 4px;
+  background: none;
+  border: none;
+  color: #7c8089;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.api-key-input .toggle-visibility:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.api-key-help {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.api-key-help a {
+  color: #61afef;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.api-key-help a:hover {
+  color: #8ac7ff;
+  text-decoration: underline;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #c6c9cc;
+  cursor: pointer;
+  appearance: none;
+  background-image: url(${___CSS_LOADER_URL_REPLACEMENT_0___});
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1em;
+  height: 32px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px rgba(97, 175, 239, 0.3);
+}
+
+.form-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.save-button {
+  padding: 0.4rem 1.25rem;
+  background: rgba(0, 0, 0, 0.3);
+  color: #c6c9cc;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 120px;
+  height: 32px;
+}
+
+.save-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.save-button:active {
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateY(1px);
+} `, "",{"version":3,"sources":["webpack://./src/renderer/ConfigScreen.css"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,QAAQ;EACR,SAAS;EACT,2BAA2B;EAC3B,aAAa;AACf;;AAEA;EACE,gCAAgC;EAChC,aAAa;EACb,kBAAkB;EAClB,YAAY;EACZ,2CAA2C;AAC7C;;AAEA;EACE,cAAc;EACd,mBAAmB;EACnB,kBAAkB;EAClB,iBAAiB;EACjB,mBAAmB;AACrB;;AAEA;EACE,sBAAsB;AACxB;;AAEA;EACE,cAAc;EACd,cAAc;EACd,sBAAsB;EACtB,iBAAiB;AACnB;;AAEA;EACE,kBAAkB;EAClB,aAAa;EACb,mBAAmB;EACnB,8BAA8B;EAC9B,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE,OAAO;EACP,uBAAuB;EACvB,mBAAmB,EAAE,8BAA8B;EACnD,kBAAkB;EAClB,YAAY;EACZ,kBAAkB;EAClB,uBAAuB;EACvB,cAAc;EACd,oEAAoE;EACpE,qBAAqB;EACrB,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,mBAAmB;EACnB,gBAAgB;AAClB;;AAEA;EACE,kBAAkB;EAClB,UAAU;EACV,gBAAgB;EAChB,YAAY;EACZ,cAAc;EACd,eAAe;EACf,YAAY;EACZ,wBAAwB;EACxB,gBAAgB;EAChB,iBAAiB;EACjB,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,UAAU;EACV,oCAAoC;AACtC;;AAEA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,+BAA+B;AACjC;;AAEA;EACE,cAAc;EACd,qBAAqB;EACrB,sBAAsB;AACxB;;AAEA;EACE,cAAc;EACd,0BAA0B;AAC5B;;AAEA;EACE,WAAW;EACX,uBAAuB;EACvB,kBAAkB;EAClB,YAAY;EACZ,kBAAkB;EAClB,8BAA8B;EAC9B,cAAc;EACd,eAAe;EACf,gBAAgB;EAChB,yDAAwR;EACxR,4BAA4B;EAC5B,yCAAyC;EACzC,oBAAoB;EACpB,YAAY;AACd;;AAEA;;EAEE,aAAa;EACb,6CAA6C;AAC/C;;AAEA;EACE,gBAAgB;EAChB,aAAa;EACb,uBAAuB;AACzB;;AAEA;EACE,uBAAuB;EACvB,8BAA8B;EAC9B,cAAc;EACd,0CAA0C;EAC1C,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,oBAAoB;EACpB,gBAAgB;EAChB,YAAY;AACd;;AAEA;EACE,oCAAoC;EACpC,sCAAsC;AACxC;;AAEA;EACE,8BAA8B;EAC9B,0BAA0B;AAC5B","sourcesContent":[".config-screen {\n  position: fixed;\n  top: 0px;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 1000;\n}\n\n.config-container {\n  background: rgba(0, 0, 0, 0.688);\n  padding: 1rem;\n  border-radius: 8px;\n  width: 400px;\n  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.815);\n}\n\n.config-container h2 {\n  color: #edf1f5;\n  margin-bottom: 1rem;\n  text-align: center;\n  font-size: 0.9rem;\n  font-weight: normal;\n}\n\n.form-group {\n  margin-bottom: 0.75rem;\n}\n\n.form-group label {\n  display: block;\n  color: #edf1f5;\n  margin-bottom: 0.25rem;\n  font-size: 0.8rem;\n}\n\n.api-key-input {\n  position: relative;\n  display: flex;\n  align-items: center;\n  background: rgba(0, 0, 0, 0.3);\n  border-radius: 4px;\n  height: 32px;\n  max-width: 100%;\n}\n\n.api-key-input input {\n  flex: 1;\n  padding: 0.4rem 0.75rem;\n  padding-right: 60px; /* Make space for the button */\n  font-size: 0.85rem;\n  border: none;\n  border-radius: 4px;\n  background: transparent;\n  color: #c6c9cc;\n  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;\n  letter-spacing: 0.5px;\n  width: 100%;\n  height: 100%;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.api-key-input .toggle-visibility {\n  position: absolute;\n  right: 4px;\n  background: none;\n  border: none;\n  color: #7c8089;\n  cursor: pointer;\n  opacity: 0.7;\n  transition: opacity 0.2s;\n  padding: 4px 8px;\n  font-size: 0.8rem;\n  border-radius: 4px;\n  min-width: 50px;\n  text-align: center;\n}\n\n.api-key-input .toggle-visibility:hover {\n  opacity: 1;\n  background: rgba(255, 255, 255, 0.1);\n}\n\n.api-key-help {\n  margin-top: 0.5rem;\n  font-size: 0.85rem;\n  color: rgba(255, 255, 255, 0.6);\n}\n\n.api-key-help a {\n  color: #61afef;\n  text-decoration: none;\n  transition: color 0.2s;\n}\n\n.api-key-help a:hover {\n  color: #8ac7ff;\n  text-decoration: underline;\n}\n\n.form-group select {\n  width: 100%;\n  padding: 0.4rem 0.75rem;\n  font-size: 0.85rem;\n  border: none;\n  border-radius: 4px;\n  background: rgba(0, 0, 0, 0.3);\n  color: #c6c9cc;\n  cursor: pointer;\n  appearance: none;\n  background-image: url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c8089' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e\");\n  background-repeat: no-repeat;\n  background-position: right 0.75rem center;\n  background-size: 1em;\n  height: 32px;\n}\n\n.form-group input:focus,\n.form-group select:focus {\n  outline: none;\n  box-shadow: 0 0 0 1px rgba(97, 175, 239, 0.3);\n}\n\n.form-actions {\n  margin-top: 1rem;\n  display: flex;\n  justify-content: center;\n}\n\n.save-button {\n  padding: 0.4rem 1.25rem;\n  background: rgba(0, 0, 0, 0.3);\n  color: #c6c9cc;\n  border: 1px solid rgba(255, 255, 255, 0.1);\n  border-radius: 4px;\n  font-size: 0.85rem;\n  cursor: pointer;\n  transition: all 0.2s;\n  min-width: 120px;\n  height: 32px;\n}\n\n.save-button:hover {\n  background: rgba(255, 255, 255, 0.1);\n  border-color: rgba(255, 255, 255, 0.2);\n}\n\n.save-button:active {\n  background: rgba(0, 0, 0, 0.4);\n  transform: translateY(1px);\n} "],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -409,6 +699,41 @@ module.exports = function (cssWithMappingToString) {
     }
   };
   return list;
+};
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
+/*!********************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
+  \********************************************************/
+/***/ ((module) => {
+
+
+
+module.exports = function (url, options) {
+  if (!options) {
+    options = {};
+  }
+  if (!url) {
+    return url;
+  }
+  url = String(url.__esModule ? url.default : url);
+
+  // If url is already wrapped in quotes, remove them
+  if (/^['"].*['"]$/.test(url)) {
+    url = url.slice(1, -1);
+  }
+  if (options.hash) {
+    url += options.hash;
+  }
+
+  // Should url be wrapped?
+  // See https://drafts.csswg.org/css-values-3/#urls
+  if (/["'() \t\n]|(%20)/.test(url) || options.needQuotes) {
+    return "\"".concat(url.replace(/"/g, '\\"').replace(/\n/g, "\\n"), "\"");
+  }
+  return url;
 };
 
 /***/ }),
@@ -34200,14 +34525,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.css */ "./src/renderer/App.css");
+/* harmony import */ var _ConfigScreen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ConfigScreen */ "./src/renderer/ConfigScreen.tsx");
+
 
 
 const App = () => {
   const [isProcessing, setIsProcessing] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [result, setResult] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [screenshots, setScreenshots] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [showConfig, setShowConfig] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [config, setConfig] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [error, setError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const loadConfig = async () => {
+      const savedConfig = await window.electron.getConfig();
+      setConfig(savedConfig);
+      if (!savedConfig) {
+        setShowConfig(true);
+      }
+    };
+    loadConfig();
+  }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     console.log('Setting up event listeners...');
+
+    // Listen for show config events
+    window.electron.onShowConfig(() => {
+      setShowConfig(prev => !prev);
+    });
 
     // Listen for processing started events
     window.electron.onProcessingStarted(() => {
@@ -34234,6 +34579,12 @@ const App = () => {
         case 'r':
           console.log('Reset hotkey pressed');
           await handleReset();
+          break;
+        case 'p':
+          if (isCmdOrCtrl) {
+            console.log('Toggle config hotkey pressed');
+            setShowConfig(prev => !prev);
+          }
           break;
         case 'b':
           if (isCmdOrCtrl) {
@@ -34288,6 +34639,14 @@ const App = () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 5000); // Hide error after 5 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
   const handleTakeScreenshot = async () => {
     console.log('Taking screenshot, current count:', screenshots.length);
     if (screenshots.length >= 4) {
@@ -34309,11 +34668,13 @@ const App = () => {
     }
     setIsProcessing(true);
     setResult(null);
+    setError(null);
     try {
       await window.electron.processScreenshots();
       console.log('Process request sent successfully');
     } catch (error) {
       console.error('Error processing screenshots:', error);
+      setError(error?.message || 'Error processing screenshots');
       setIsProcessing(false);
     }
   };
@@ -34324,6 +34685,21 @@ const App = () => {
   const handleQuit = () => {
     console.log('Quitting application...');
     window.electron.quit();
+  };
+  const handleConfigSave = async newConfig => {
+    try {
+      const success = await window.electron.saveConfig(newConfig);
+      if (success) {
+        setConfig(newConfig);
+        setShowConfig(false);
+        setError(null);
+      } else {
+        setError('Failed to save configuration');
+      }
+    } catch (error) {
+      console.error('Error saving configuration:', error);
+      setError(error?.message || 'Error saving configuration');
+    }
   };
 
   // Log state changes
@@ -34344,7 +34720,14 @@ const App = () => {
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "error-bar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, error), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setError(null)
+  }, "\xD7")), showConfig && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ConfigScreen__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    onSave: handleConfigSave,
+    initialConfig: config || undefined
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "shortcuts-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "shortcut"
@@ -34353,10 +34736,18 @@ const App = () => {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + \u21B5"), " Solution"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "shortcut"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + R"), " Reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "hover-shortcuts"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "hover-shortcuts-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "shortcut"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + B"), " Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + B"), " Show/Hide"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "shortcut"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + Q"), " Quit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + P"), " Settings"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + Q"), " Quit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "shortcut"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, "\u2318/Ctrl + Arrow Keys"), " Move Around")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "preview-row"
   }, screenshots.map(screenshot => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     key: screenshot.id,
@@ -34372,7 +34763,7 @@ const App = () => {
     className: "result"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "solution-section"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "My Thoughts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, result.approach)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Approach"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, result.approach)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "solution-section"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Solution"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pre", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, formatCode(result.code)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "solution-section"
@@ -34383,6 +34774,158 @@ const App = () => {
   }, screenshots.length > 0 ? `Press ⌘/Ctrl + ↵ to process ${screenshots.length} screenshot${screenshots.length > 1 ? 's' : ''}` : 'Press ⌘/Ctrl + H to take a screenshot')));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./src/renderer/ConfigScreen.css":
+/*!***************************************!*\
+  !*** ./src/renderer/ConfigScreen.css ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ConfigScreen_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./ConfigScreen.css */ "./node_modules/css-loader/dist/cjs.js!./src/renderer/ConfigScreen.css");
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+
+      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+    
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ConfigScreen_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ConfigScreen_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_ConfigScreen_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_ConfigScreen_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
+/***/ "./src/renderer/ConfigScreen.tsx":
+/*!***************************************!*\
+  !*** ./src/renderer/ConfigScreen.tsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ConfigScreen_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConfigScreen.css */ "./src/renderer/ConfigScreen.css");
+
+
+const ConfigScreen = ({
+  onSave,
+  initialConfig
+}) => {
+  const [apiKey, setApiKey] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialConfig?.apiKey || '');
+  const [language, setLanguage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialConfig?.language || 'Python');
+  const [showApiKey, setShowApiKey] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const handleSubmit = e => {
+    e.preventDefault();
+    onSave({
+      apiKey: apiKey.trim(),
+      language
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "config-screen"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "config-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Configuration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "apiKey"
+  }, "OpenAI API Key"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "api-key-input"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: showApiKey ? "text" : "password",
+    id: "apiKey",
+    value: apiKey,
+    onChange: e => setApiKey(e.target.value),
+    required: true,
+    placeholder: "sk-...",
+    spellCheck: "false",
+    autoComplete: "off"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "button",
+    className: "toggle-visibility",
+    onClick: () => setShowApiKey(!showApiKey)
+  }, showApiKey ? 'Hide' : 'Show'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "language"
+  }, "Preferred Language"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    id: "language",
+    value: language,
+    onChange: e => setLanguage(e.target.value),
+    required: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "Python"
+  }, "Python"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "JavaScript"
+  }, "JavaScript"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "TypeScript"
+  }, "TypeScript"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "Java"
+  }, "Java"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "C++"
+  }, "C++"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "Go"
+  }, "Go"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "Rust"
+  }, "Rust"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-actions"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "submit",
+    className: "save-button"
+  }, "Save Configuration")))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ConfigScreen);
+
+/***/ }),
+
+/***/ "data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%237c8089%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%237c8089%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%237c8089%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3e%3cpolyline points=%276 9 12 15 18 9%27%3e%3c/polyline%3e%3c/svg%3e";
 
 /***/ })
 
@@ -34414,6 +34957,9 @@ const App = () => {
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
@@ -34463,6 +35009,32 @@ const App = () => {
 /******/ 			if (!module.children) module.children = [];
 /******/ 			return module;
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		__webpack_require__.b = document.baseURI || self.location.href;
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"main": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		// no on chunks loaded
+/******/ 		
+/******/ 		// no jsonp function
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/nonce */

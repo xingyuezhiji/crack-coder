@@ -32,15 +32,36 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 require("./App.css");
+const ConfigScreen_1 = __importDefault(require("./ConfigScreen"));
 const App = () => {
     const [isProcessing, setIsProcessing] = (0, react_1.useState)(false);
     const [result, setResult] = (0, react_1.useState)(null);
     const [screenshots, setScreenshots] = (0, react_1.useState)([]);
+    const [showConfig, setShowConfig] = (0, react_1.useState)(false);
+    const [config, setConfig] = (0, react_1.useState)(null);
+    const [error, setError] = (0, react_1.useState)(null);
+    (0, react_1.useEffect)(() => {
+        const loadConfig = async () => {
+            const savedConfig = await window.electron.getConfig();
+            setConfig(savedConfig);
+            if (!savedConfig) {
+                setShowConfig(true);
+            }
+        };
+        loadConfig();
+    }, []);
     (0, react_1.useEffect)(() => {
         console.log('Setting up event listeners...');
+        // Listen for show config events
+        window.electron.onShowConfig(() => {
+            setShowConfig(prev => !prev);
+        });
         // Listen for processing started events
         window.electron.onProcessingStarted(() => {
             console.log('Processing started');
@@ -64,6 +85,12 @@ const App = () => {
                 case 'r':
                     console.log('Reset hotkey pressed');
                     await handleReset();
+                    break;
+                case 'p':
+                    if (isCmdOrCtrl) {
+                        console.log('Toggle config hotkey pressed');
+                        setShowConfig(prev => !prev);
+                    }
                     break;
                 case 'b':
                     if (isCmdOrCtrl) {
@@ -114,6 +141,14 @@ const App = () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
+    (0, react_1.useEffect)(() => {
+        if (error) {
+            const timer = setTimeout(() => {
+                setError(null);
+            }, 5000); // Hide error after 5 seconds
+            return () => clearTimeout(timer);
+        }
+    }, [error]);
     const handleTakeScreenshot = async () => {
         console.log('Taking screenshot, current count:', screenshots.length);
         if (screenshots.length >= 4) {
@@ -136,12 +171,14 @@ const App = () => {
         }
         setIsProcessing(true);
         setResult(null);
+        setError(null);
         try {
             await window.electron.processScreenshots();
             console.log('Process request sent successfully');
         }
         catch (error) {
             console.error('Error processing screenshots:', error);
+            setError(error?.message || 'Error processing screenshots');
             setIsProcessing(false);
         }
     };
@@ -152,6 +189,23 @@ const App = () => {
     const handleQuit = () => {
         console.log('Quitting application...');
         window.electron.quit();
+    };
+    const handleConfigSave = async (newConfig) => {
+        try {
+            const success = await window.electron.saveConfig(newConfig);
+            if (success) {
+                setConfig(newConfig);
+                setShowConfig(false);
+                setError(null);
+            }
+            else {
+                setError('Failed to save configuration');
+            }
+        }
+        catch (error) {
+            console.error('Error saving configuration:', error);
+            setError(error?.message || 'Error saving configuration');
+        }
     };
     // Log state changes
     (0, react_1.useEffect)(() => {
@@ -167,6 +221,10 @@ const App = () => {
             line)));
     };
     return (react_1.default.createElement("div", { className: "app" },
+        error && (react_1.default.createElement("div", { className: "error-bar" },
+            react_1.default.createElement("span", null, error),
+            react_1.default.createElement("button", { onClick: () => setError(null) }, "\u00D7"))),
+        showConfig && (react_1.default.createElement(ConfigScreen_1.default, { onSave: handleConfigSave, initialConfig: config || undefined })),
         react_1.default.createElement("div", { className: "shortcuts-row" },
             react_1.default.createElement("div", { className: "shortcut" },
                 react_1.default.createElement("code", null, "\u2318/Ctrl + H"),
@@ -177,12 +235,20 @@ const App = () => {
             react_1.default.createElement("div", { className: "shortcut" },
                 react_1.default.createElement("code", null, "\u2318/Ctrl + R"),
                 " Reset"),
-            react_1.default.createElement("div", { className: "shortcut" },
-                react_1.default.createElement("code", null, "\u2318/Ctrl + B"),
-                " Toggle"),
-            react_1.default.createElement("div", { className: "shortcut" },
-                react_1.default.createElement("code", null, "\u2318/Ctrl + Q"),
-                " Quit")),
+            react_1.default.createElement("div", { className: "hover-shortcuts" },
+                react_1.default.createElement("div", { className: "hover-shortcuts-content" },
+                    react_1.default.createElement("div", { className: "shortcut" },
+                        react_1.default.createElement("code", null, "\u2318/Ctrl + B"),
+                        " Show/Hide"),
+                    react_1.default.createElement("div", { className: "shortcut" },
+                        react_1.default.createElement("code", null, "\u2318/Ctrl + P"),
+                        " Settings"),
+                    react_1.default.createElement("div", { className: "shortcut" },
+                        react_1.default.createElement("code", null, "\u2318/Ctrl + Q"),
+                        " Quit"),
+                    react_1.default.createElement("div", { className: "shortcut" },
+                        react_1.default.createElement("code", null, "\u2318/Ctrl + Arrow Keys"),
+                        " Move Around")))),
         react_1.default.createElement("div", { className: "preview-row" }, screenshots.map(screenshot => (react_1.default.createElement("div", { key: screenshot.id, className: "preview-item" },
             react_1.default.createElement("img", { src: screenshot.preview, alt: "Screenshot preview" }))))),
         react_1.default.createElement("div", { className: "status-row" }, isProcessing ? (react_1.default.createElement("div", { className: "processing" },
@@ -190,7 +256,7 @@ const App = () => {
             screenshots.length,
             " screenshots)")) : result ? (react_1.default.createElement("div", { className: "result" },
             react_1.default.createElement("div", { className: "solution-section" },
-                react_1.default.createElement("h3", null, "My Thoughts"),
+                react_1.default.createElement("h3", null, "Approach"),
                 react_1.default.createElement("p", null, result.approach)),
             react_1.default.createElement("div", { className: "solution-section" },
                 react_1.default.createElement("h3", null, "Solution"),

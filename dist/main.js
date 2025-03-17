@@ -43,6 +43,8 @@ const child_process_1 = require("child_process");
 const util_1 = require("util");
 const openai_1 = __importDefault(require("./services/openai"));
 const execFileAsync = (0, util_1.promisify)(child_process_1.execFile);
+const CONFIG_FILE = path.join(electron_1.app.getPath('userData'), 'config.json');
+let config = null;
 let mainWindow = null;
 let screenshotQueue = [];
 let isProcessing = false;
@@ -54,6 +56,37 @@ async function ensureScreenshotDir() {
     }
     catch (error) {
         console.error('Error creating screenshot directory:', error);
+    }
+}
+async function loadConfig() {
+    try {
+        const data = await fs.readFile(CONFIG_FILE, 'utf-8');
+        const loadedConfig = JSON.parse(data);
+        if (loadedConfig && loadedConfig.apiKey && loadedConfig.language) {
+            // Update OpenAI service with loaded config
+            openai_1.default.updateConfig(loadedConfig);
+            return loadedConfig;
+        }
+        return null;
+    }
+    catch (error) {
+        console.error('Error loading config:', error);
+        return null;
+    }
+}
+async function saveConfig(newConfig) {
+    try {
+        if (!newConfig.apiKey || !newConfig.language) {
+            throw new Error('Invalid configuration');
+        }
+        await fs.writeFile(CONFIG_FILE, JSON.stringify(newConfig, null, 2));
+        config = newConfig;
+        // Update OpenAI service with new config
+        openai_1.default.updateConfig(newConfig);
+    }
+    catch (error) {
+        console.error('Error saving config:', error);
+        throw error;
     }
 }
 function createWindow() {
@@ -110,6 +143,10 @@ function registerShortcuts() {
     electron_1.globalShortcut.register('CommandOrControl+Right', () => moveWindow('right'));
     electron_1.globalShortcut.register('CommandOrControl+Up', () => moveWindow('up'));
     electron_1.globalShortcut.register('CommandOrControl+Down', () => moveWindow('down'));
+    // Config shortcut
+    electron_1.globalShortcut.register('CommandOrControl+P', () => {
+        mainWindow?.webContents.send('show-config');
+    });
 }
 async function captureScreenshot() {
     if (process.platform === 'darwin') {
@@ -178,9 +215,18 @@ async function handleProcessScreenshots() {
         // Check if processing was cancelled
         if (!isProcessing)
             return;
+        // Extract the most relevant error message
+        let errorMessage = 'Error processing screenshots';
+        if (error?.error?.message) {
+            errorMessage = error.error.message;
+        }
+        else if (error?.message) {
+            errorMessage = error.message;
+        }
         mainWindow?.webContents.send('processing-complete', JSON.stringify({
-            approach: 'Error processing screenshots',
-            code: 'Error occurred',
+            error: errorMessage,
+            approach: 'Error occurred while processing',
+            code: 'Error: ' + errorMessage,
             timeComplexity: 'N/A',
             spaceComplexity: 'N/A'
         }));
@@ -245,6 +291,8 @@ function moveWindow(direction) {
 // This method will be called when Electron has finished initialization
 electron_1.app.whenReady().then(async () => {
     await ensureScreenshotDir();
+    // Load config before creating window
+    config = await loadConfig();
     createWindow();
     electron_1.app.on('activate', function () {
         if (electron_1.BrowserWindow.getAllWindows().length === 0)
@@ -282,3 +330,26 @@ electron_1.ipcMain.on('quit-app', () => {
     electron_1.app.quit();
 });
 electron_1.ipcMain.on('toggle-visibility', handleToggleVisibility);
+// Add these IPC handlers before app.whenReady()
+electron_1.ipcMain.handle('get-config', async () => {
+    try {
+        if (!config) {
+            config = await loadConfig();
+        }
+        return config;
+    }
+    catch (error) {
+        console.error('Error getting config:', error);
+        return null;
+    }
+});
+electron_1.ipcMain.handle('save-config', async (_, newConfig) => {
+    try {
+        await saveConfig(newConfig);
+        return true;
+    }
+    catch (error) {
+        console.error('Error in save-config handler:', error);
+        return false;
+    }
+});

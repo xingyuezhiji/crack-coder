@@ -9,17 +9,22 @@ electron_1.contextBridge.exposeInMainWorld('electron', {
     takeScreenshot: () => electron_1.ipcRenderer.invoke('take-screenshot'),
     processScreenshots: () => electron_1.ipcRenderer.invoke('process-screenshots'),
     resetQueue: () => electron_1.ipcRenderer.invoke('reset-queue'),
+    getConfig: () => electron_1.ipcRenderer.invoke('get-config'),
+    saveConfig: (config) => electron_1.ipcRenderer.invoke('save-config', config),
     toggleVisibility: () => electron_1.ipcRenderer.send('toggle-visibility'),
     onProcessingComplete: (callback) => {
-        electron_1.ipcRenderer.on('processing-complete', (_event, result) => callback(result));
+        electron_1.ipcRenderer.on('processing-complete', (_, result) => callback(result));
     },
     onScreenshotTaken: (callback) => {
-        electron_1.ipcRenderer.on('screenshot-taken', (_event, data) => callback(data));
+        electron_1.ipcRenderer.on('screenshot-taken', (_, data) => callback(data));
     },
     onProcessingStarted: (callback) => {
-        electron_1.ipcRenderer.on('processing-started', callback);
+        electron_1.ipcRenderer.on('processing-started', () => callback());
     },
     onQueueReset: (callback) => {
-        electron_1.ipcRenderer.on('queue-reset', callback);
+        electron_1.ipcRenderer.on('queue-reset', () => callback());
+    },
+    onShowConfig: (callback) => {
+        electron_1.ipcRenderer.on('show-config', () => callback());
     }
 });

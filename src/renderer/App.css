@@ -24,7 +24,7 @@ body {
   display: flex;
   gap: 0.5rem;
   padding: 0.5rem;
-  background-color: rgba(30, 33, 40, 0.4);
+  background-color: rgba(7, 8, 9, 0.4);
   border-radius: 4px;
   min-height: 60px;
   align-items: center;
@@ -52,7 +52,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: rgba(30, 33, 40, 0.4);
+  background-color: rgba(7, 8, 9, 0.4);
   border-radius: 4px;
   min-height: 24px;
 }
@@ -70,18 +70,18 @@ body {
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.25rem;
 }
 
 .solution-section {
-  background: rgba(30, 33, 40, 0.4);
-  border-radius: 4px;
+  margin: 0.25rem 0;
   padding: 1rem;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
 }
 
 .solution-section h3 {
-  color: #e8ebef;
+  color: #edf1f5;
   font-size: 0.8rem;
   margin: 0 0 0.5rem 0;
   font-weight: normal;
@@ -104,8 +104,11 @@ body {
 .solution-section p {
   margin: 0.5rem 0;
   line-height: 1.5;
-  color: #abb2bf;
+  color: #c6c9cc;
   font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 4px;
 }
 
 .empty-status {
@@ -123,9 +126,62 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
-  background-color: rgba(30, 33, 40, 0.4);
+  background-color: rgba(7, 8, 9, 0.4);
   border-radius: 4px;
   font-size: 0.6rem;
+  position: relative;
+}
+
+.hover-shortcuts {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hover-shortcuts::before {
+  content: "?";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(97, 175, 239, 0.2);
+  border-radius: 50%;
+  color: #61afef;
+  cursor: help;
+}
+
+.hover-shortcuts-content {
+  display: none;
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(7, 8, 9, 0.9);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  margin-right: 10px;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  min-width: 180px;
+  white-space: nowrap;
+}
+
+.hover-shortcuts:hover .hover-shortcuts-content {
+  display: flex;
+}
+
+.hover-shortcuts-content::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 5px solid rgba(7, 8, 9, 0.9);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
 }
 
 .shortcut {
@@ -154,8 +210,11 @@ body {
 
 .hint {
   font-size: 0.8rem;
-  color: #5c6370;
+  color: #dbdce0;
   margin-top: 0.5rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Add a draggable region for window dragging since we removed the frame */
@@ -260,6 +319,7 @@ body {
 .solution-section p {
   margin: 0.5rem 0;
   line-height: 1.5;
+  color: #c6c9cc;
 }
 
 .code-line {
@@ -289,4 +349,52 @@ code {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
   font-size: 0.9rem;
   color: #abb2bf;
+}
+
+.error-bar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 59, 48, 0.9);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease-out;
+}
+
+.error-bar span {
+  font-size: 14px;
+}
+
+.error-bar button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.error-bar button:hover {
+  opacity: 1;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
 } 

@@ -13,6 +13,15 @@ interface Screenshot {
   path: string;
 }
 
+const CONFIG_FILE = path.join(app.getPath('userData'), 'config.json');
+
+interface Config {
+  apiKey: string;
+  language: string;
+}
+
+let config: Config | null = null;
+
 let mainWindow: BrowserWindow | null = null;
 let screenshotQueue: Screenshot[] = [];
 let isProcessing = false;
@@ -24,6 +33,37 @@ async function ensureScreenshotDir() {
     await fs.mkdir(SCREENSHOT_DIR, { recursive: true });
   } catch (error) {
     console.error('Error creating screenshot directory:', error);
+  }
+}
+
+async function loadConfig(): Promise<Config | null> {
+  try {
+    const data = await fs.readFile(CONFIG_FILE, 'utf-8');
+    const loadedConfig = JSON.parse(data);
+    if (loadedConfig && loadedConfig.apiKey && loadedConfig.language) {
+      // Update OpenAI service with loaded config
+      openaiService.updateConfig(loadedConfig);
+      return loadedConfig;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error loading config:', error);
+    return null;
+  }
+}
+
+async function saveConfig(newConfig: Config): Promise<void> {
+  try {
+    if (!newConfig.apiKey || !newConfig.language) {
+      throw new Error('Invalid configuration');
+    }
+    await fs.writeFile(CONFIG_FILE, JSON.stringify(newConfig, null, 2));
+    config = newConfig;
+    // Update OpenAI service with new config
+    openaiService.updateConfig(newConfig);
+  } catch (error) {
+    console.error('Error saving config:', error);
+    throw error;
   }
 }
 
@@ -90,6 +130,11 @@ function registerShortcuts() {
   globalShortcut.register('CommandOrControl+Right', () => moveWindow('right'));
   globalShortcut.register('CommandOrControl+Up', () => moveWindow('up'));
   globalShortcut.register('CommandOrControl+Down', () => moveWindow('down'));
+
+  // Config shortcut
+  globalShortcut.register('CommandOrControl+P', () => {
+    mainWindow?.webContents.send('show-config');
+  });
 }
 
 async function captureScreenshot(): Promise<Buffer> {
@@ -157,13 +202,23 @@ async function handleProcessScreenshots() {
     // Check if processing was cancelled
     if (!isProcessing) return;
     mainWindow?.webContents.send('processing-complete', JSON.stringify(result));
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error processing screenshots:', error);
     // Check if processing was cancelled
     if (!isProcessing) return;
+    
+    // Extract the most relevant error message
+    let errorMessage = 'Error processing screenshots';
+    if (error?.error?.message) {
+      errorMessage = error.error.message;
+    } else if (error?.message) {
+      errorMessage = error.message;
+    }
+    
     mainWindow?.webContents.send('processing-complete', JSON.stringify({
-      approach: 'Error processing screenshots',
-      code: 'Error occurred',
+      error: errorMessage,
+      approach: 'Error occurred while processing',
+      code: 'Error: ' + errorMessage,
       timeComplexity: 'N/A',
       spaceComplexity: 'N/A'
     }));
@@ -231,6 +286,8 @@ function moveWindow(direction: 'left' | 'right' | 'up' | 'down') {
 // This method will be called when Electron has finished initialization
 app.whenReady().then(async () => {
   await ensureScreenshotDir();
+  // Load config before creating window
+  config = await loadConfig();
   createWindow();
 
   app.on('activate', function () {
@@ -273,4 +330,27 @@ ipcMain.on('quit-app', () => {
   app.quit();
 });
 
-ipcMain.on('toggle-visibility', handleToggleVisibility); 
+ipcMain.on('toggle-visibility', handleToggleVisibility);
+
+// Add these IPC handlers before app.whenReady()
+ipcMain.handle('get-config', async () => {
+  try {
+    if (!config) {
+      config = await loadConfig();
+    }
+    return config;
+  } catch (error) {
+    console.error('Error getting config:', error);
+    return null;
+  }
+});
+
+ipcMain.handle('save-config', async (_, newConfig: Config) => {
+  try {
+    await saveConfig(newConfig);
+    return true;
+  } catch (error) {
+    console.error('Error in save-config handler:', error);
+    return false;
+  }
+}); 

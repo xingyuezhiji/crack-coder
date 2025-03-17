@@ -4,11 +4,42 @@ import fs from 'fs/promises';
 
 dotenv.config();
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openai: OpenAI | null = null;
+let language = process.env.LANGUAGE || "Python";
 
-const language = "JavaScript";
+interface Config {
+  apiKey: string;
+  language: string;
+}
+
+function updateConfig(config: Config) {
+  if (!config.apiKey) {
+    throw new Error('OpenAI API key is required');
+  }
+  
+  try {
+    openai = new OpenAI({
+      apiKey: config.apiKey.trim(),
+    });
+    language = config.language || 'Python';
+    console.log('OpenAI client initialized with new config');
+  } catch (error) {
+    console.error('Error initializing OpenAI client:', error);
+    throw error;
+  }
+}
+
+// Initialize with environment variables if available
+if (process.env.OPENAI_API_KEY) {
+  try {
+    updateConfig({
+      apiKey: process.env.OPENAI_API_KEY,
+      language: process.env.LANGUAGE || 'Python'
+    });
+  } catch (error) {
+    console.error('Error initializing OpenAI with environment variables:', error);
+  }
+}
 
 interface ProcessedSolution {
   approach: string;
@@ -22,6 +53,10 @@ type MessageContent =
   | { type: "image_url"; image_url: { url: string } };
 
 export async function processScreenshots(screenshots: { path: string }[]): Promise<ProcessedSolution> {
+  if (!openai) {
+    throw new Error('OpenAI client not initialized. Please configure API key first.');
+  }
+
   try {
     const messages = [
       {
@@ -77,5 +112,6 @@ export async function processScreenshots(screenshots: { path: string }[]): Promi
 }
 
 export default {
-  processScreenshots
+  processScreenshots,
+  updateConfig
 };

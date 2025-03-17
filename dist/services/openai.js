@@ -8,11 +8,40 @@ const openai_1 = __importDefault(require("openai"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const promises_1 = __importDefault(require("fs/promises"));
 dotenv_1.default.config();
-const openai = new openai_1.default({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-const language = "JavaScript";
+let openai = null;
+let language = process.env.LANGUAGE || "Python";
+function updateConfig(config) {
+    if (!config.apiKey) {
+        throw new Error('OpenAI API key is required');
+    }
+    try {
+        openai = new openai_1.default({
+            apiKey: config.apiKey.trim(),
+        });
+        language = config.language || 'Python';
+        console.log('OpenAI client initialized with new config');
+    }
+    catch (error) {
+        console.error('Error initializing OpenAI client:', error);
+        throw error;
+    }
+}
+// Initialize with environment variables if available
+if (process.env.OPENAI_API_KEY) {
+    try {
+        updateConfig({
+            apiKey: process.env.OPENAI_API_KEY,
+            language: process.env.LANGUAGE || 'Python'
+        });
+    }
+    catch (error) {
+        console.error('Error initializing OpenAI with environment variables:', error);
+    }
+}
 async function processScreenshots(screenshots) {
+    if (!openai) {
+        throw new Error('OpenAI client not initialized. Please configure API key first.');
+    }
     try {
         const messages = [
             {
@@ -65,5 +94,6 @@ async function processScreenshots(screenshots) {
     }
 }
 exports.default = {
-    processScreenshots
+    processScreenshots,
+    updateConfig
 };
