@@ -48,7 +48,7 @@ https://github.com/user-attachments/assets/179701eb-0fcf-4e33-86f3-c92688f508a5
 
 ## Configuration
 
-Create a `.env` file in the root directory with the following settings:
+Create a `.env` file in the root directory with the following settings: ( or Just press ⌘/Ctrl + P and set it up in Settings/Config page)
 ```env
 OPENAI_API_KEY="your-api-key-here"
 APP_LANGUAGE="Java"  # Or Python, JavaScript, C++, etc.
@@ -59,8 +59,6 @@ APP_LANGUAGE="Java"  # Or Python, JavaScript, C++, etc.
    Start the application:
    ```bash
    npm start   # For local setup
-   # OR
-   Simply launch the application if you used the direct download
    ```
 
 ## Shortcuts
