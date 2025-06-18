@@ -20,6 +20,9 @@ function updateConfig(config: Config) {
   try {
     openai = new OpenAI({
       apiKey: config.apiKey.trim(),
+      // baseURL: "https://api.siliconflow.cn/v1/",
+      baseURL: "https://open.bigmodel.cn/api/paas/v4/",
+      timeout: 300 * 1000, // 5 minutes timeout
     });
     language = config.language || 'Python';
     // console.log('OpenAI client initialized with new config');
@@ -34,7 +37,8 @@ if (process.env.OPENAI_API_KEY) {
   try {
     updateConfig({
       apiKey: process.env.OPENAI_API_KEY,
-      language: process.env.LANGUAGE || 'Python'
+      language: process.env.LANGUAGE || 'Python',
+      // baseURL: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1'
     });
   } catch (error) {
     console.error('Error initializing OpenAI with environment variables:', error);
@@ -68,12 +72,21 @@ export async function processScreenshots(screenshots: { path: string }[]): Promi
                    "code": "The complete solution code",
                    "timeComplexity": "Big O analysis of time complexity with the reason",
                    "spaceComplexity": "Big O analysis of space complexity with the reason"
-                 }`
+                 }, 并将json里面的内容翻译成中文`
+        // content:`你是一名专业的编程面试辅助助手。根据截图中的编程问题进行分析，并提供${language}语言的解决方案。   
+        // 返回的响应需遵循以下JSON格式：   {   
+        // "approach": "详细的问题解决思路，用易于解释的语言描述面试者将如何口头阐述解决步骤",     
+        // "code": "完整的解决方案代码",     
+        // "timeComplexity": "时间复杂度的Big O分析及原因说明",     
+        // "spaceComplexity": "空间复杂度的Big O分析及原因说明"   
+        // }`
       },
       {
         role: "user" as const,
         content: [
-          { type: "text", text: "Here is a coding interview question. Please analyze and provide a solution." } as MessageContent
+          { type: "text", 
+            text: "Here is a coding interview question. Please analyze and provide a solution." } as MessageContent
+            // text: "这是一道编程面试题。请分析并给出一个solution." } as MessageContent
         ]
       }
     ];
@@ -96,7 +109,8 @@ export async function processScreenshots(screenshots: { path: string }[]): Promi
 
     // Get response from OpenAI
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      // model: "Qwen/Qwen3-8B",
+      model: "glm-4v-plus-0111",
       messages: messages as any,
       max_tokens: 2000,
       temperature: 0.7,
