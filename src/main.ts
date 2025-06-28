@@ -4,6 +4,7 @@ import * as fs from 'fs/promises';
 import { execFile } from 'child_process';
 import { promisify } from 'util';
 import openaiService from './services/openai';
+// import openaiService from './services/zhipuai_free';
 
 const execFileAsync = promisify(execFile);
 
@@ -19,6 +20,8 @@ console.log(CONFIG_FILE);
 interface Config {
   apiKey: string;
   language: string;
+  model: string;
+  baseURL: string;
 }
 
 let config: Config | null = null;
@@ -46,7 +49,9 @@ async function loadConfig(): Promise<Config | null> {
     if (envApiKey && envLanguage) {
       const envConfig = {
         apiKey: envApiKey,
-        language: envLanguage
+        language: envLanguage,
+        model: process.env.MODEL || "qwen/qwen2.5-vl-32b-instruct:free",
+        baseURL: process.env.BASE_URL || "https://openrouter.ai/api/v1"
       };
       openaiService.updateConfig(envConfig);
       return envConfig;
@@ -55,9 +60,14 @@ async function loadConfig(): Promise<Config | null> {
     // If env vars not found, try loading from config file
     const data = await fs.readFile(CONFIG_FILE, 'utf-8');
     const loadedConfig = JSON.parse(data);
-    if (loadedConfig && loadedConfig.apiKey && loadedConfig.language) {
-      openaiService.updateConfig(loadedConfig);
-      return loadedConfig;
+    const configWithDefaults = {
+      model: "qwen/qwen2.5-vl-32b-instruct:free",
+      baseURL: "https://openrouter.ai/api/v1",
+      ...loadedConfig
+    };
+    if (configWithDefaults && configWithDefaults.apiKey && configWithDefaults.language) {
+      openaiService.updateConfig(configWithDefaults);
+        return configWithDefaults;
     }
     return null;
   } catch (error) {
@@ -366,4 +376,4 @@ ipcMain.handle('save-config', async (_, newConfig: Config) => {
     console.error('Error in save-config handler:', error);
     return false;
   }
-}); 
+});

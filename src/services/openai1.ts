@@ -10,8 +10,6 @@ let language = process.env.LANGUAGE || "Python";
 interface Config {
   apiKey: string;
   language: string;
-  model: string;
-  baseURL: string;
 }
 
 function updateConfig(config: Config) {
@@ -22,7 +20,10 @@ function updateConfig(config: Config) {
   try {
     openai = new OpenAI({
       apiKey: config.apiKey.trim(),
-      baseURL: config.baseURL,
+      // baseURL: "https://api.siliconflow.cn/v1/",
+      // baseURL: "https://open.bigmodel.cn/api/paas/v4/",
+      baseURL: "https://openrouter.ai/api/v1",
+      // baseURL: "https://spark-api-open.xf-yun.com/v1",
       timeout: 300 * 1000, // 5 minutes timeout
     });
     language = config.language || 'Python';
@@ -39,8 +40,7 @@ if (process.env.OPENAI_API_KEY) {
     updateConfig({
       apiKey: process.env.OPENAI_API_KEY,
       language: process.env.LANGUAGE || 'Python',
-      model:  process.env.MODEL || "qwen/qwen2.5-vl-32b-instruct:free",
-      baseURL: process.env.BASE_URL || "https://openrouter.ai/api/v1"
+      // baseURL: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1'
     });
   } catch (error) {
     console.error('Error initializing OpenAI with environment variables:', error);
@@ -111,8 +111,10 @@ export async function processScreenshots(screenshots: { path: string }[]): Promi
 
     // Get response from OpenAI
     const response = await openai.chat.completions.create({
+      // model: "spark-lite",
       // model: "glm-4v-plus-0111",
-      model: process.env.MODEL || "qwen/qwen2.5-vl-32b-instruct:free",
+      model: "qwen/qwen2.5-vl-32b-instruct:free",
+      // model: "GLM-4-Flash-250414",
       messages: messages as any,
       max_tokens: 2000,
       temperature: 0.7,
